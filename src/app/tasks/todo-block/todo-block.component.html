@@ -1,0 +1,36 @@
+<div #todo class="todo-block">
+  <div class="todo-block__title flex-container">
+    <h3>{{ title }}</h3>
+    <p>{{ tasks.length }}</p>
+  </div>
+  <div class="todo-block__task-add item-container">
+    <button (click)="openWindow()">+</button>
+  </div>
+  <div class="todo-block__content flex-container">
+    <task
+      *ngFor="let task of tasks"
+      [title]="task.title"
+      [content]="task.content"
+      [timestamp]="task.timestamp"
+      [categoryIndex]="categoryIndex"
+      (onMoveEvent)="onTaskMove($event)"
+      (onStopMoveEvent)="onTaskStopMove($event)"
+    ></task>
+  </div>
+  <div class="todo-block__move"></div>
+  <message-window [isOpened]="isOpened" (onClosed)="closeWindow()">
+    <form class="add-task">
+      <div class="item-container">
+        <label for="title">Название</label>
+        <input [(ngModel)]="taskTitleToAdd" [ngModelOptions]="{ standalone: true }" id="title" type="text" />
+      </div>
+      <div class="item-container">
+        <label for="title">Описание</label>
+        <textarea [(ngModel)]="taskContentToAdd" [ngModelOptions]="{ standalone: true }" id="description"></textarea>
+      </div>
+      <div class="item-container">
+        <button type="submit" (click)="addTask()">Добавить</button>
+      </div>
+    </form>
+  </message-window>
+</div>

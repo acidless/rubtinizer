@@ -1,0 +1,68 @@
+@import "../../../animations";
+
+.message-window-wrapper {
+  background: rgba(0, 0, 0, 0.7);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 20;
+  opacity: 0;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s opacity ease-in-out;
+
+  &.scrollable .message-window {
+    overflow-y: auto;
+  }
+
+  &.active {
+    opacity: 1;
+    pointer-events: visible;
+
+    .message-window {
+      animation-duration: 0.5s;
+      animation-name: bounceIn;
+      &__panel,
+      &__content {
+        visibility: visible;
+      }
+    }
+  }
+
+  .message-window {
+    background: var(--main-bg--darker);
+    padding: 2em;
+    border-radius: 0.5em;
+    width: 40em;
+    overflow: auto;
+    max-height: calc(100vh - 3em);
+
+    &__content {
+      visibility: hidden;
+    }
+  }
+}
+
+.window-part {
+  visibility: hidden;
+
+  &.active {
+    visibility: visible;
+  }
+}
+
+.window-buttons {
+  justify-content: flex-end !important;
+
+  button {
+    font-size: 2.8rem;
+
+    &:first-child {
+      margin-right: 1em;
+    }
+  }
+}

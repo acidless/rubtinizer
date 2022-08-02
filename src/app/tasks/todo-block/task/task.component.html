@@ -1,0 +1,10 @@
+<div
+  #task
+  class="task"
+  [ngClass]="{ grabbing: isMoving }"
+  (mousedown)="onMouseDown($event)"
+  (mouseup)="onMouseUp($event)"
+>
+  <h4>{{ title }}</h4>
+  <p>{{ content }}</p>
+</div>

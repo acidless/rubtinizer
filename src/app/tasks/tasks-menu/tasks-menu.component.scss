@@ -1,0 +1,47 @@
+.tasks-menu {
+  position: relative;
+  z-index: 1000;
+
+  button {
+    margin: 0;
+    span {
+      font-size: 1rem;
+      color: var(--main-color);
+      transition: 0.3s color ease-in-out;
+    }
+
+    &:hover span {
+      color: var(--main-color--darker);
+    }
+  }
+
+  &__content {
+    background: var(--main-color);
+    padding: 1em;
+    border-radius: 0.5em;
+    position: absolute;
+    right: 0;
+    width: max-content;
+    transform: translateY(-25em);
+    transition: 0.3s transform ease-in-out;
+
+    &.active {
+      transform: none;
+    }
+
+    button {
+      justify-content: flex-start;
+      align-items: center;
+      gap: 0.2em;
+
+      span {
+        color: white;
+        font-size: 1rem;
+      }
+
+      &:hover span {
+        color: white;
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+<div class="content">
+  <div class="claendar-wrapper">
+    <div class="calendar-inner">
+      <div class="calendar-title flex-container">
+        <button (click)="monthBack()"><</button>
+        <h1>
+          {{ months[this.month] }}, <span>{{ this.year }}</span>
+        </h1>
+        <button (click)="monthNext()">{{ ">" }}</button>
+      </div>
+      <div class="calendar">
+        <div class="calendar__header">
+          <h2>Пн</h2>
+          <h2>Вт</h2>
+          <h2>Ср</h2>
+          <h2>Чт</h2>
+          <h2>Пт</h2>
+          <h2>Сб</h2>
+          <h2>Вс</h2>
+        </div>
+        <div class="calendar__data" *ngFor="let week of dates">
+          <div
+            *ngFor="let day of week"
+            class="calendar__day"
+            [ngClass]="{ active: isActiveDate(day?.date) }"
+            (click)="setActiveDate(day?.date)"
+          >
+            <div *ngIf="day">
+              <p>{{ day?.date.getDate() }}</p>
+              <p class="day__tasks-count">{{ day?.tasks[0].length }}</p>
+            </div>
+            <div *ngIf="!day">
+              <p>-</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="activeDate.tasks[0].length" class="uncompleted-tasks">
+      <h3>Невыполненные задачи</h3>
+      <div class="uncompleted-tasks__task" *ngFor="let task of activeDate.tasks[0]">
+        <p>{{ task.title }}</p>
+      </div>
+    </div>
+  </div>
+</div>

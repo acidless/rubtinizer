@@ -1,0 +1,11 @@
+<div
+  #windowBG
+  (mousedown)="setTarget($event.target)"
+  (mouseup)="toggleWindow($event)"
+  class="message-window-wrapper content-center flex-container"
+  [ngClass]="{ active: isOpened }"
+>
+  <div class="message-window relative">
+    <div class="message-window__content"><ng-content></ng-content></div>
+  </div>
+</div>

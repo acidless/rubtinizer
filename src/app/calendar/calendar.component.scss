@@ -1,0 +1,97 @@
+:host {
+  width: 100%;
+}
+
+.calendar-title {
+  text-align: center;
+  padding: 2em;
+  margin-bottom: 1em;
+  border-bottom: 0.1em var(--gray) solid;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+
+  h1 {
+    color: var(--main-color);
+  }
+
+  span {
+    color: black;
+  }
+
+  button {
+    margin: 0;
+  }
+}
+
+.calendar-inner {
+  width: fit-content;
+  margin-bottom: 2em;
+}
+
+.calendar {
+  &__header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-gap: 3em;
+    padding: 0 1.5em;
+    margin-bottom: 1em;
+  }
+
+  &__data {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+
+    p {
+      font-size: 1.5rem;
+      text-align: center;
+    }
+  }
+
+  &__day {
+    padding: 2em;
+    cursor: pointer;
+    transition: 0.3s border ease-in-out;
+    border: 1px solid var(--gray);
+
+    p {
+      color: black;
+      transition: 0.3s color ease-in-out;
+    }
+
+    &:hover,
+    &.active {
+      border: 1px solid var(--main-color);
+
+      p {
+        color: var(--main-color);
+      }
+    }
+  }
+
+  .day__tasks-count {
+    font-size: 1rem;
+    color: var(--main-color);
+  }
+}
+
+.uncompleted-tasks {
+  width: 100%;
+
+  &__task {
+    padding: 1em;
+    background: white;
+    width: 100%;
+    border-bottom: 1px var(--main-color) solid;
+    border-radius: 0.5em;
+
+    &:not(:last-child) {
+      margin-bottom: 1em;
+    }
+
+    p {
+      color: black;
+    }
+  }
+}

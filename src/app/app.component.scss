@@ -1,0 +1,11 @@
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  background: var(--main-bg);
+  overflow: hidden;
+  position: relative;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+}

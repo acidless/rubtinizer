@@ -1,0 +1,21 @@
+.task {
+  background: white;
+  padding: 1em;
+  border-radius: 0.5rem;
+  cursor: grab;
+  position: relative;
+  transition: transform 0.3s ease-in-out;
+
+  &.grabbing {
+    z-index: 100;
+    transition: transform 0.02s ease-in-out;
+  }
+
+  h4 {
+    margin-bottom: 0.5em;
+  }
+
+  p {
+    color: black;
+  }
+}

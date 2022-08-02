@@ -1,0 +1,32 @@
+.menu {
+  height: 100%;
+  padding: 3em 0em 1em 1em;
+  flex-direction: column;
+  align-items: flex-start;
+  background: white;
+  border-right: 2px var(--gray) solid;
+
+  a {
+    align-items: center;
+    gap: 0.5em;
+    width: 101%;
+    border-right: 2px transparent solid;
+    padding: 0.75em 3em 0.75em 0.5em;
+    transition: all 0.3s ease-in-out;
+
+    &.active,
+    &:hover {
+      border-right: 2px var(--main-color) solid;
+
+      span {
+        color: var(--main-color);
+        transform: rotateZ(5deg) scale(1.1);
+      }
+    }
+
+    span {
+      transition: all 0.3s ease-in-out;
+      color: black;
+    }
+  }
+}
