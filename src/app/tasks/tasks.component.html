@@ -1,38 +1,39 @@
 <div class="content">
+  <app-tasks-search (onSearchChange)="onSearchChange($event)"></app-tasks-search>
   <div class="todo-header flex-container">
     <h2>{{ tasksService.currentDate | date: "longDate" }}</h2>
     <tasks-menu></tasks-menu>
   </div>
   <div class="todo-blocks">
-    <todo-block
+    <app-todo-block
       title="Сделать"
-      [tasks]="tasksService.tasks[0]"
-      categoryIndex="0"
-      (addTaskEvent)="tasksService.addTask($event)"
-      [onTaskMove]="tasksService.taskMoving.bind(tasksService)"
-      [onTaskStopMove]="tasksService.taskStopMoving.bind(tasksService)"
+      [tasks]="tasksService.tasks[0] | tasksFilter: searchStr"
+      [categoryIndex]="0"
+      (addTaskEvent)="taskService.addTask($event)"
+      [onTaskMove]="taskService.taskMoving.bind(taskService)"
+      [onTaskStopMove]="taskService.taskStopMoving.bind(taskService)"
       (onTodoBlockSetted)="onInitTodoBlock($event)"
-    ></todo-block>
-    <todo-block
+    ></app-todo-block>
+    <app-todo-block
       title="В процессе"
-      categoryIndex="1"
-      [tasks]="tasksService.tasks[1]"
-      (addTaskEvent)="tasksService.addTask($event)"
-      [onTaskMove]="tasksService.taskMoving.bind(tasksService)"
-      [onTaskStopMove]="tasksService.taskStopMoving.bind(tasksService)"
+      [categoryIndex]="1"
+      [tasks]="tasksService.tasks[1] | tasksFilter: searchStr"
+      (addTaskEvent)="taskService.addTask($event)"
+      [onTaskMove]="taskService.taskMoving.bind(taskService)"
+      [onTaskStopMove]="taskService.taskStopMoving.bind(taskService)"
       (onTodoBlockSetted)="onInitTodoBlock($event)"
-    ></todo-block>
-    <todo-block
+    ></app-todo-block>
+    <app-todo-block
       title="Выполнено"
-      categoryIndex="2"
-      [tasks]="tasksService.tasks[2]"
-      (addTaskEvent)="tasksService.addTask($event)"
-      [onTaskMove]="tasksService.taskMoving.bind(tasksService)"
-      [onTaskStopMove]="tasksService.taskStopMoving.bind(tasksService)"
+      [categoryIndex]="2"
+      [tasks]="tasksService.tasks[2] | tasksFilter: searchStr"
+      (addTaskEvent)="taskService.addTask($event)"
+      [onTaskMove]="taskService.taskMoving.bind(taskService)"
+      [onTaskStopMove]="taskService.taskStopMoving.bind(taskService)"
       (onTodoBlockSetted)="onInitTodoBlock($event)"
-    ></todo-block>
+    ></app-todo-block>
   </div>
-  <div #taskdelete class="delete-task" [ngClass]="{ active: tasksService.isTaskMoving }">
+  <div #taskdelete class="delete-task" [ngClass]="{ active: taskService.isTaskMoving }">
     <span class="material-icons"> delete </span>
   </div>
 </div>

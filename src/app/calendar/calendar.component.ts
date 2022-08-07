@@ -1,6 +1,6 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
-import data from '../../../data.json';
 import { ToDoTask } from '../../types/task';
+import { DataService } from '../data.service';
 
 interface DateTasks {
   date: Date;
@@ -8,7 +8,7 @@ interface DateTasks {
 }
 
 @Component({
-  selector: 'calendar',
+  selector: 'app-calendar',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
 })
@@ -33,9 +33,12 @@ export class CalendarComponent implements OnInit, OnChanges {
     'Декабрь',
   ];
 
-  constructor() {}
+  data: any;
+
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
+    this.data = this.dataService.getData();
     const currentDate = new Date(localStorage.getItem('date'));
 
     this.month = currentDate.getMonth();
@@ -54,7 +57,7 @@ export class CalendarComponent implements OnInit, OnChanges {
     let day = date.getDay();
     if (!day) day = 7;
 
-    let tasks = data[date.toDateString()];
+    let tasks = this.data[date.toDateString()];
     this.dates[0][day - 1] = { date, tasks: tasks || [[]] };
 
     while (true) {
@@ -64,7 +67,7 @@ export class CalendarComponent implements OnInit, OnChanges {
         break;
       }
 
-      tasks = data[date.toDateString()];
+      tasks = this.data[date.toDateString()];
       this.dates[weekCounter].push({ date, tasks: tasks || [[]] });
 
       if (!date.getDay()) {
@@ -100,7 +103,7 @@ export class CalendarComponent implements OnInit, OnChanges {
   }
 
   setActiveDate(date: Date) {
-    this.activeDate = { date, tasks: data[date.toDateString()] || [[]] };
+    this.activeDate = { date, tasks: this.data[date.toDateString()] || [[]] };
     localStorage.setItem('date', date.toDateString());
   }
 }

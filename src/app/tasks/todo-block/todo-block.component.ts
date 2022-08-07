@@ -1,8 +1,9 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ToDoTask } from '../../../types/task';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
-  selector: 'todo-block',
+  selector: 'app-todo-block',
   templateUrl: './todo-block.component.html',
   styleUrls: ['./todo-block.component.scss'],
 })
@@ -10,27 +11,27 @@ export class TodoBlockComponent implements OnInit {
   @Input() title = '';
   @Input() tasks: Array<ToDoTask> = [];
   @Input() onTaskMove = (event: any) => {};
-  @Input() onTaskStopMove = () => {};
+  @Input() onTaskStopMove = (task: ToDoTask) => {};
   @Input() categoryIndex: number;
+
+  @Output() addTaskEvent = new EventEmitter();
+  @Output() onTodoBlockSetted = new EventEmitter<ElementRef>();
 
   @ViewChild('todo', { static: true })
   todoBlock: ElementRef | undefined;
 
-  @Output()
-  addTaskEvent = new EventEmitter();
+  isOpened = false;
 
-  @Output()
-  onTodoBlockSetted = new EventEmitter<ElementRef>();
+  form = new FormGroup({
+    title: new FormControl('', [Validators.required, Validators.max(64)]),
+    content: new FormControl('', [Validators.required, Validators.max(500)]),
+  });
 
   constructor() {}
 
   ngOnInit(): void {
     this.onTodoBlockSetted.emit(this.todoBlock);
   }
-
-  isOpened = false;
-  taskTitleToAdd = '';
-  taskContentToAdd = '';
 
   openWindow() {
     this.isOpened = true;
@@ -41,14 +42,10 @@ export class TodoBlockComponent implements OnInit {
   }
 
   addTask() {
-    const title = this.taskTitleToAdd.trim();
-    const content = this.taskContentToAdd.trim();
+    if (this.form.status === 'VALID') {
+      this.addTaskEvent.emit({ task: { ...this.form.value, timestamp: Date.now() }, index: this.categoryIndex });
 
-    if (title) {
-      this.addTaskEvent.emit({ task: { title, content, timestamp: Date.now() }, index: this.categoryIndex });
-
-      this.taskTitleToAdd = '';
-      this.taskContentToAdd = '';
+      this.form.reset();
       this.isOpened = false;
     }
   }

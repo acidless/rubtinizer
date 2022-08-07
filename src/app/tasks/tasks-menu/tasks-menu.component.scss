@@ -1,6 +1,5 @@
 .tasks-menu {
   position: relative;
-  z-index: 1000;
 
   button {
     margin: 0;
@@ -24,6 +23,7 @@
     width: max-content;
     transform: translateY(-25em);
     transition: 0.3s transform ease-in-out;
+    z-index: 2;
 
     &.active {
       transform: none;

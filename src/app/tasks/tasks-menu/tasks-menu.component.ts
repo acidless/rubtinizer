@@ -7,9 +7,9 @@ import { TasksService } from '../tasks.service';
   styleUrls: ['./tasks-menu.component.scss'],
 })
 export class TasksMenuComponent implements OnInit {
-  constructor(private tasksService: TasksService) {}
-
   isOpened = false;
+
+  constructor(public tasksService: TasksService) {}
 
   ngOnInit(): void {}
 

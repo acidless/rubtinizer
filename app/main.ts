@@ -14,10 +14,12 @@ function createWindow(): BrowserWindow {
   win = new BrowserWindow({
     x: 0,
     y: 0,
+    title: 'Rubtinizer',
     width: 800,
     height: 600,
     minWidth: 800,
     minHeight: 600,
+    icon: path.join(__dirname, 'rubtidnizer.png'),
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: serve ? true : false,
@@ -91,6 +93,19 @@ try {
       });
 
       event.returnValue = 1;
+    }
+  });
+
+  ipcMain.on('data', (event, args) => {
+    if (args[0] === 'get') {
+      fs.writeFile('data.json', '{}', { flag: 'wx' }, function (err) {});
+
+      try {
+        // @ts-ignore
+        event.returnValue = JSON.parse(fs.readFileSync('data.json'));
+      } catch (e) {
+        event.returnValue = {};
+      }
     }
   });
 } catch (e) {

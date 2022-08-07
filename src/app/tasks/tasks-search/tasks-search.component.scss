@@ -1,0 +1,16 @@
+.tasks-search {
+  align-items: center;
+  margin-bottom: 2em;
+  grid-gap: 0.25em;
+
+  span {
+    color: black;
+  }
+
+  input {
+    width: 100%;
+    background: none;
+    font-size: 1.5rem;
+    padding: 0.5em 0.5em 0.5em 0;
+  }
+}

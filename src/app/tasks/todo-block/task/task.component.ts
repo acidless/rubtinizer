@@ -5,25 +5,22 @@ import { ToDoTask } from '../../../../types/task';
 interface OnMouseEventParams {
   event: MouseEvent;
   taskRect: DOMRect;
-  categoryIndex: number;
+  taskCategoryIndex: number;
 }
 
 @Component({
-  selector: 'task',
+  selector: 'app-task',
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss'],
 })
 export class TaskComponent implements OnInit, OnDestroy {
+  @Input() task: ToDoTask;
+  @Input() categoryIndex: number;
+
   @Output() onMoveEvent = new EventEmitter<OnMouseEventParams>();
   @Output() onStopMoveEvent = new EventEmitter<ToDoTask>();
 
-  @Input()
-  title: string;
-  @Input() content: string;
-  @Input() timestamp: number;
-  @Input() categoryIndex: number;
-
-  @ViewChild('task', { static: false })
+  @ViewChild('taskdiv', { static: true })
   taskDiv: ElementRef | undefined;
 
   isMoving = false;
@@ -52,19 +49,20 @@ export class TaskComponent implements OnInit, OnDestroy {
   onMouseUp(event) {
     if (this.isMoving) {
       event.preventDefault();
+
       this.isMoving = false;
       this.taskDiv.nativeElement.style.transform = 'none';
-      this.onStopMoveEvent.emit({ title: this.title, content: this.content, timestamp: this.timestamp });
+      this.onStopMoveEvent.emit(this.task);
     }
   }
 
   onMouseMove(event: MouseEvent) {
     if (this.isMoving) {
-      this.taskDiv.nativeElement.style.transform = `rotateZ(-3deg) translate(${event.x - this.baseRect.x}px, ${
-        event.y - this.baseRect.y
-      }px)`;
+      const xOffset = event.x - this.baseRect.x;
+      const yOffset = event.y - this.baseRect.y;
 
-      this.onMoveEvent.emit({ event, taskRect: this.baseRect, categoryIndex: this.categoryIndex });
+      this.taskDiv.nativeElement.style.transform = `rotateZ(-3deg) translate(${xOffset}px, ${yOffset}px)`;
+      this.onMoveEvent.emit({ event, taskRect: this.baseRect, taskCategoryIndex: this.categoryIndex });
     }
   }
 }

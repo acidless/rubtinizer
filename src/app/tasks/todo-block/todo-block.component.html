@@ -7,30 +7,28 @@
     <button (click)="openWindow()">+</button>
   </div>
   <div class="todo-block__content flex-container">
-    <task
+    <app-task
       *ngFor="let task of tasks"
-      [title]="task.title"
-      [content]="task.content"
-      [timestamp]="task.timestamp"
+      [task]="task"
       [categoryIndex]="categoryIndex"
       (onMoveEvent)="onTaskMove($event)"
       (onStopMoveEvent)="onTaskStopMove($event)"
-    ></task>
+    ></app-task>
   </div>
   <div class="todo-block__move"></div>
-  <message-window [isOpened]="isOpened" (onClosed)="closeWindow()">
-    <form class="add-task">
+  <app-message-window [isOpened]="isOpened" (onClosed)="closeWindow()">
+    <form [formGroup]="form" (ngSubmit)="addTask()" class="add-task">
       <div class="item-container">
         <label for="title">Название</label>
-        <input [(ngModel)]="taskTitleToAdd" [ngModelOptions]="{ standalone: true }" id="title" type="text" />
+        <input formControlName="title" id="title" type="text" />
       </div>
       <div class="item-container">
         <label for="title">Описание</label>
-        <textarea [(ngModel)]="taskContentToAdd" [ngModelOptions]="{ standalone: true }" id="description"></textarea>
+        <textarea formControlName="content" id="description"></textarea>
       </div>
       <div class="item-container">
-        <button type="submit" (click)="addTask()">Добавить</button>
+        <button type="submit">Добавить</button>
       </div>
     </form>
-  </message-window>
+  </app-message-window>
 </div>

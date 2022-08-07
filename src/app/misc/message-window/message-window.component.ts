@@ -1,24 +1,25 @@
 import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 
 @Component({
-  selector: 'message-window',
+  selector: 'app-message-window',
   templateUrl: './message-window.component.html',
   styleUrls: ['./message-window.component.scss'],
 })
 export class MessageWindowComponent {
-  constructor() {}
+  @Input() isOpened = false;
+
+  @Output() onClosed = new EventEmitter();
 
   @ViewChild('windowBG', { static: false })
   windowBG: ElementRef | undefined;
 
-  @Input() isOpened = false;
+  currentTarget = null;
 
-  @Output() onClosed = new EventEmitter();
+  constructor() {}
+
   close() {
     this.onClosed.emit();
   }
-
-  currentTarget = null;
 
   toggleWindow(e: Event) {
     if (e.target === this.currentTarget && this.currentTarget === this.windowBG.nativeElement) {
