@@ -32,7 +32,7 @@ export class TasksService {
 
     if (!this.isTasksEmpty(this.tasks) || !this.isTasksEmpty(this.data[currentDateIndex])) {
       this.data[currentDateIndex] = [...this.tasks];
-      this.electronService.ipcRenderer.send('tasks', ['save', JSON.stringify(this.data)]);
+      this.electronService.ipcRenderer.send('tasks', ['save', this.data]);
     }
 
     localStorage.setItem('date', this.currentDate.toDateString());

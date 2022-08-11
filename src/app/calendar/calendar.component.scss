@@ -16,7 +16,7 @@
   }
 
   span {
-    color: black;
+    color: var(--text-color);
   }
 
   button {
@@ -53,10 +53,10 @@
     padding: 2em;
     cursor: pointer;
     transition: 0.3s border ease-in-out;
-    border: 1px solid var(--gray);
+    border: 1px solid var(--main-bg--darker);
 
     p {
-      color: black;
+      color: var(--text-color);
       transition: 0.3s color ease-in-out;
     }
 
@@ -81,7 +81,7 @@
 
   &__task {
     padding: 1em;
-    background: white;
+    background: var(--main-bg--darker);
     width: 100%;
     border-bottom: 1px var(--main-color) solid;
     border-radius: 0.5em;
@@ -91,7 +91,7 @@
     }
 
     p {
-      color: black;
+      color: var(--text-color);
     }
   }
 }

@@ -1,7 +1,8 @@
-import { app, BrowserWindow, screen, ipcMain } from 'electron';
+import { app, BrowserWindow, screen, ipcMain, Notification } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as url from 'url';
+import { ToDoTask } from '../src/types/task';
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
@@ -79,8 +80,6 @@ try {
   });
 
   app.on('activate', () => {
-    // On OS X it's common to re-create a window in the app when the
-    // dock icon is clicked and there are no other windows open.
     if (win === null) {
       createWindow();
     }
@@ -88,9 +87,15 @@ try {
 
   ipcMain.on('tasks', (event, args) => {
     if (args[0] === 'save') {
-      fs.writeFile('data.json', args[1], (err) => {
-        console.log(err);
+      let data = args[1];
+
+      Object.keys(data).forEach((key) => {
+        if (Date.now() - new Date(key).getTime() > 1000 * 3600 * 24 * 7) {
+          delete data[key];
+        }
       });
+
+      saveFile(JSON.stringify(data));
 
       event.returnValue = 1;
     }
@@ -98,17 +103,47 @@ try {
 
   ipcMain.on('data', (event, args) => {
     if (args[0] === 'get') {
-      fs.writeFile('data.json', '{}', { flag: 'wx' }, function (err) {});
-
-      try {
-        // @ts-ignore
-        event.returnValue = JSON.parse(fs.readFileSync('data.json'));
-      } catch (e) {
-        event.returnValue = {};
-      }
+      event.returnValue = readFile();
     }
   });
 } catch (e) {
   // Catch Error
   // throw e;
 }
+
+function saveFile(data: string) {
+  fs.writeFile('data.json', data, (err) => {
+    console.log(err);
+  });
+}
+
+function readFile() {
+  fs.writeFile('data.json', '{}', { flag: 'wx' }, function (err) {});
+
+  try {
+    // @ts-ignore
+    return JSON.parse(fs.readFileSync('data.json'));
+  } catch (e) {
+    return null;
+  }
+}
+
+setInterval(() => {
+  const data = readFile();
+  const currentDate = new Date();
+  const currentTasks: Array<Array<ToDoTask>> | null = data ? data[currentDate.toDateString()] : null;
+
+  if (currentTasks) {
+    currentTasks[0].forEach((task) => {
+      if (task.notificationTime) {
+        if (currentDate.toLocaleTimeString().substring(0, 5) == task.notificationTime) {
+          new Notification({
+            title: 'Вам нужно выполнить задачу!',
+            body: task.title,
+            icon: path.join(__dirname, 'rubtidnizer.png'),
+          }).show();
+        }
+      }
+    });
+  }
+}, 1000 * 60);

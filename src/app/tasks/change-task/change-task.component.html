@@ -1,0 +1,19 @@
+<app-message-window [isOpened]="isOpened" (onClosed)="closeWindow()">
+  <form [formGroup]="taskEditForm" (ngSubmit)="changeTask()" class="change-task">
+    <div class="item-container">
+      <label for="title">Название</label>
+      <input formControlName="title" id="title" type="text" />
+    </div>
+    <div class="item-container">
+      <label for="description">Описание</label>
+      <textarea formControlName="content" id="description"></textarea>
+    </div>
+    <div class="item-container">
+      <label for="notificationTime">Время напоминания</label>
+      <input formControlName="notificationTime" type="time" id="notificationTime" />
+    </div>
+    <div class="item-container">
+      <button type="submit">Изменить</button>
+    </div>
+  </form>
+</app-message-window>

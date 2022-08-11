@@ -23,8 +23,12 @@
         <input formControlName="title" id="title" type="text" />
       </div>
       <div class="item-container">
-        <label for="title">Описание</label>
+        <label for="description">Описание</label>
         <textarea formControlName="content" id="description"></textarea>
+      </div>
+      <div class="item-container">
+        <label for="notificationTime">Время напоминания</label>
+        <input formControlName="notificationTime" type="time" id="notificationTime" />
       </div>
       <div class="item-container">
         <button type="submit">Добавить</button>

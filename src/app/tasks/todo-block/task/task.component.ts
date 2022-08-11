@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Input } from '@angular/core';
 import { ToDoTask } from '../../../../types/task';
+import { TaskService } from './task.service';
 
 interface OnMouseEventParams {
   event: MouseEvent;
@@ -26,7 +27,7 @@ export class TaskComponent implements OnInit, OnDestroy {
   isMoving = false;
   baseRect: DOMRect;
 
-  constructor() {}
+  constructor(private taskService: TaskService) {}
 
   ngOnDestroy(): void {
     document.removeEventListener('mousemove', this.onMouseMove.bind(this));
@@ -64,5 +65,9 @@ export class TaskComponent implements OnInit, OnDestroy {
       this.taskDiv.nativeElement.style.transform = `rotateZ(-3deg) translate(${xOffset}px, ${yOffset}px)`;
       this.onMoveEvent.emit({ event, taskRect: this.baseRect, taskCategoryIndex: this.categoryIndex });
     }
+  }
+
+  setEditingTask() {
+    this.taskService.editingTask = { ...this.task };
   }
 }

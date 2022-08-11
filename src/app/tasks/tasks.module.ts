@@ -8,6 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TasksMenuComponent } from './tasks-menu/tasks-menu.component';
 import { TasksSearchComponent } from './tasks-search/tasks-search.component';
 import { TasksFilterPipe } from '../pipes/tasks-filter.pipe';
+import { ChangeTaskComponent } from './change-task/change-task.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { TasksFilterPipe } from '../pipes/tasks-filter.pipe';
     TasksMenuComponent,
     TasksSearchComponent,
     TasksFilterPipe,
+    ChangeTaskComponent,
   ],
   imports: [CommonModule, MiscModule, FormsModule, ReactiveFormsModule],
 })

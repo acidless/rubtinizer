@@ -24,7 +24,8 @@ export class TodoBlockComponent implements OnInit {
 
   form = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.max(64)]),
-    content: new FormControl('', [Validators.required, Validators.max(500)]),
+    content: new FormControl('', [Validators.max(500)]),
+    notificationTime: new FormControl(''),
   });
 
   constructor() {}

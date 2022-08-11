@@ -36,4 +36,5 @@
   <div #taskdelete class="delete-task" [ngClass]="{ active: taskService.isTaskMoving }">
     <span class="material-icons"> delete </span>
   </div>
+  <app-change-task [editingTask]="taskService.editingTask"></app-change-task>
 </div>

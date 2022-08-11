@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TasksComponent } from './tasks/tasks.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
     path: 'calendar',
     pathMatch: 'full',
     component: CalendarComponent,
+  },
+  {
+    path: 'settings',
+    pathMatch: 'full',
+    component: SettingsComponent,
   },
 ];
 

@@ -1,8 +1,9 @@
 import { ElementRef, Injectable } from '@angular/core';
-import { ToDoTask } from '../../types/task';
-import { IsPointInRect } from '../../utils';
-import { TasksService } from './tasks.service';
-import { TasksCategoriesService } from './tasks-categories.service';
+import { ToDoTask } from '../../../../types/task';
+import { IsPointInRect } from '../../../../utils';
+import { TasksService } from '../../tasks.service';
+import { TasksCategoriesService } from '../tasks-categories.service';
+import { Subscriber } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,6 +11,7 @@ import { TasksCategoriesService } from './tasks-categories.service';
 export class TaskService {
   isTaskMoving = false;
   private taskDeleteBlock: ElementRef | undefined;
+  public editingTask: ToDoTask | undefined;
 
   constructor(private tasksService: TasksService, private tasksCategoriesService: TasksCategoriesService) {}
 
@@ -19,6 +21,7 @@ export class TaskService {
 
   addTask({ task, index }) {
     this.tasksService.tasks[index].push(task);
+    this.tasksService.saveTasks();
   }
 
   removeTask(task: ToDoTask) {
@@ -29,6 +32,7 @@ export class TaskService {
     );
 
     this.tasksCategoriesService.setUndefinedMovingCategory();
+    this.tasksService.saveTasks();
   }
 
   taskMoving({ event, taskRect, taskCategoryIndex }) {
@@ -89,6 +93,22 @@ export class TaskService {
         moveBlock.classList.remove('active');
         moveBlock.style.height = 0;
       });
+
+      this.tasksService.saveTasks();
     }
+  }
+
+  changeTask(newTask: ToDoTask) {
+    this.tasksService.tasks = this.tasksService.tasks.map((taskCategory) => {
+      return taskCategory.map((task) => {
+        if (task.timestamp === this.editingTask.timestamp) {
+          return { ...newTask, timestamp: task.timestamp };
+        }
+
+        return task;
+      });
+    });
+
+    this.tasksService.saveTasks();
   }
 }

@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { TasksService } from './tasks.service';
-import { TasksCategoriesService } from './tasks-categories.service';
-import { TaskService } from './task.service';
+import { TasksCategoriesService } from './todo-block/tasks-categories.service';
+import { TaskService } from './todo-block/task/task.service';
 
 @Component({
   selector: 'app-tasks',
@@ -21,13 +21,13 @@ export class TasksComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnDestroy(): void {
-    this.tasksService.saveTasks();
     this.tasksCategoriesService.todoCategoriesBlocks = [];
   }
 
   ngOnInit(): void {
     this.tasksService.loadTasks();
     this.taskService.setTaskDeleteBlock(this.taskDeleteBlock);
+    this.taskService.editingTask = undefined;
   }
 
   onInitTodoBlock(block: ElementRef) {

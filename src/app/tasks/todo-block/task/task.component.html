@@ -5,6 +5,12 @@
   (mousedown)="onMouseDown($event)"
   (mouseup)="onMouseUp($event)"
 >
-  <h4>{{ task.title }}</h4>
+  <div class="task__title flex-container">
+    <h4>{{ task.title }}</h4>
+    <button (click)="setEditingTask()" class="transparent-button">
+      <span class="material-icons"> edit </span>
+    </button>
+  </div>
+
   <p *ngIf="task.content">{{ task.content }}</p>
 </div>
