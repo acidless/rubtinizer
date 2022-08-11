@@ -1,0 +1,16 @@
+<div class="topbar flex-container">
+  <div>
+    <h1>Rubtidnizer</h1>
+  </div>
+  <div class="flex-container topbar__buttons">
+    <button (click)="topbarService.windowMinimize()" class="transparent-button flex-container">
+      <span class="material-icons"> minimize </span>
+    </button>
+    <button (click)="topbarService.windowMaximize()" class="transparent-button flex-container">
+      <span class="material-icons"> fullscreen </span>
+    </button>
+    <button (click)="topbarService.windowClose()" class="transparent-button flex-container">
+      <span class="material-icons"> close </span>
+    </button>
+  </div>
+</div>

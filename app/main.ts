@@ -21,6 +21,7 @@ function createWindow(): BrowserWindow {
     minWidth: 800,
     minHeight: 600,
     icon: path.join(__dirname, 'rubtidnizer.png'),
+    frame: false,
     webPreferences: {
       nodeIntegration: true,
       allowRunningInsecureContent: serve ? true : false,
@@ -104,6 +105,17 @@ try {
   ipcMain.on('data', (event, args) => {
     if (args[0] === 'get') {
       event.returnValue = readFile();
+    }
+  });
+
+  ipcMain.on('window', (event, args) => {
+    switch (args[0]) {
+      case 'close':
+        return win.close();
+      case 'minimize':
+        return win.minimize();
+      case 'maximize':
+        return win.isMaximized() ? win.unmaximize() : win.maximize();
     }
   });
 } catch (e) {

@@ -1,6 +1,10 @@
 <div class="app-container" [attr.data-theme]="settingsService.theme">
-  <app-menu></app-menu>
-  <main>
-    <router-outlet></router-outlet>
-  </main>
+  <app-topbar></app-topbar>
+
+  <div class="app-content">
+    <app-menu></app-menu>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </div>
 </div>

@@ -3,9 +3,12 @@
   height: 100vh;
   background: var(--main-bg);
   overflow: hidden;
-  position: relative;
+}
 
+.app-content {
   display: flex;
   align-items: stretch;
   justify-content: stretch;
+  position: relative;
+  height: 100%;
 }

@@ -1,0 +1,32 @@
+.topbar {
+  width: 100%;
+  background: var(--main-color);
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 1em;
+  -webkit-app-region: drag;
+
+  h1 {
+    color: white;
+  }
+
+  &__buttons {
+    -webkit-app-region: no-drag;
+
+    button {
+      padding: 0.25em;
+      margin: 0;
+      justify-content: center;
+      align-items: center;
+      border-radius: 0;
+
+      span {
+        color: white;
+      }
+
+      &:hover {
+        background: var(--main-color--darker);
+      }
+    }
+  }
+}
