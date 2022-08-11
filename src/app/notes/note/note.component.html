@@ -1,0 +1,6 @@
+<div class="note flex-container">
+  <h3>{{ note.content }}</h3>
+  <button (click)="noteService.removeNote(note)" class="note__delete transparent-button flex-container">
+    <span class="material-icons"> delete </span>
+  </button>
+</div>

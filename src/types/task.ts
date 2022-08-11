@@ -1,6 +1,6 @@
-export interface ToDoTask {
+import { Note } from './note';
+
+export type ToDoTask = Note & {
   title: string;
-  content: string;
-  timestamp?: number;
   notificationTime: string;
-}
+};

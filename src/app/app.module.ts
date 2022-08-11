@@ -17,6 +17,7 @@ import { MiscModule } from './misc/misc.module';
 import { TasksModule } from './tasks/tasks.module';
 import { CalendarModule } from './calendar/calendar.module';
 import { NgxElectronModule } from 'ngx-electron';
+import { NotesModule } from './notes/notes.module';
 
 registerLocaleData(localeRu);
 
@@ -41,6 +42,7 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
     MiscModule,
     TasksModule,
     CalendarModule,
+    NotesModule,
     NgxElectronModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru' }],

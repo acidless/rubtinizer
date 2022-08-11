@@ -1,0 +1,22 @@
+.note {
+  background: var(--main-bg--darker);
+  padding: 1.5em;
+  border-radius: 0.5em;
+  justify-content: space-between;
+  align-items: center;
+
+  &__delete {
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+
+    span {
+      transition: 0.3s color, 0.3s transform ease-in-out;
+    }
+
+    &:hover span {
+      color: var(--red);
+      transform: scale(1.1) rotateZ(5deg);
+    }
+  }
+}

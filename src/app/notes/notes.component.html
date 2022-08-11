@@ -1,0 +1,10 @@
+<div class="content notes">
+  <h2>Заметки</h2>
+  <form (ngSubmit)="addNote.call(this)" class="notes__create item-container">
+    <input [(ngModel)]="note" [ngModelOptions]="{ standalone: true }" id="title" type="text" placeholder="Название" />
+    <button type="submit">+</button>
+  </form>
+  <div class="notes__list">
+    <app-note *ngFor="let note of noteService.notes" [note]="note"></app-note>
+  </div>
+</div>
