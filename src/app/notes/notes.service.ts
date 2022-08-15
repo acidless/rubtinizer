@@ -19,7 +19,9 @@ export class NotesService {
 
   addNote(note: Note) {
     data['notes'].push(note as any);
+    console.log(data);
     this.electronService.ipcRenderer.send('tasks', ['save', data]);
+    console.log(data);
   }
 
   removeNote(note: Note) {

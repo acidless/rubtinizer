@@ -4,6 +4,7 @@ import { IsPointInRect } from '../../../../utils';
 import { TasksService } from '../../tasks.service';
 import { TasksCategoriesService } from '../tasks-categories.service';
 import { Subscriber } from 'rxjs';
+import { DatabaseService } from '../../../database.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,11 @@ export class TaskService {
   private taskDeleteBlock: ElementRef | undefined;
   public editingTask: ToDoTask | undefined;
 
-  constructor(private tasksService: TasksService, private tasksCategoriesService: TasksCategoriesService) {}
+  constructor(
+    private tasksService: TasksService,
+    private tasksCategoriesService: TasksCategoriesService,
+    private databaseService: DatabaseService
+  ) {}
 
   setTaskDeleteBlock(taskDeleteBlock) {
     this.taskDeleteBlock = taskDeleteBlock;

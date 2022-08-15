@@ -3,7 +3,7 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: white;
+  background: var(--main-bg--darker);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -37,7 +37,7 @@ html {
   --light-bg--darker: rgba(129, 220, 147, 0.2);
   --main-bg: #1b202a;
   --main-bg--darker: #111820;
-  --menu-bg: #0c0f16;
+  --menu-bg: #131822;
   --gray: #0e141a;
   --text-color: #f3f3f3;
 }

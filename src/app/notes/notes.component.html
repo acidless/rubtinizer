@@ -4,7 +4,7 @@
     <input [(ngModel)]="note" [ngModelOptions]="{ standalone: true }" id="title" type="text" placeholder="Название" />
     <button type="submit">+</button>
   </form>
-  <div class="notes__list">
+  <div class="notes__list flex-container">
     <app-note *ngFor="let note of noteService.notes" [note]="note"></app-note>
   </div>
 </div>

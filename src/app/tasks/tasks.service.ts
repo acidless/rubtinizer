@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { ElectronService } from 'ngx-electron';
 import { ToDoTask } from '../../types/task';
 import { DataService } from '../data.service';
+import { DatabaseService } from '../database.service';
 
 @Injectable({
   providedIn: 'root',
@@ -11,9 +12,22 @@ export class TasksService {
   tasks: Array<Array<ToDoTask>> = this.initTasks();
   data: any;
 
-  constructor(private electronService: ElectronService, private dataService: DataService) {}
+  constructor(
+    private electronService: ElectronService,
+    private dataService: DataService,
+    private databaseService: DatabaseService
+  ) {}
 
   loadTasks() {
+    setTimeout(async () => {
+      const result = await this.databaseService.get('tasks', this.currentDate.toDateString());
+
+      if (!result) {
+        this.databaseService.setData('tasks', { date: this.currentDate.toDateString(), tasks: [[], [], []] });
+      } else {
+        this.tasks = result.tasks;
+      }
+    }, 1000);
     this.data = this.dataService.getData();
 
     this.currentDate = new Date(localStorage.getItem('date'));
@@ -34,6 +48,8 @@ export class TasksService {
       this.data[currentDateIndex] = [...this.tasks];
       this.electronService.ipcRenderer.send('tasks', ['save', this.data]);
     }
+
+    //this.databaseService.setData('tasks', { date: new Date().toLocaleDateString(), ...task });
 
     localStorage.setItem('date', this.currentDate.toDateString());
   }

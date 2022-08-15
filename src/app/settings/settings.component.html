@@ -2,27 +2,13 @@
   <h2>Настройки</h2>
   <div class="settings__theme">
     <h3>Цветовая тема</h3>
-    <div>
-      <input
-        [checked]="settingsService.theme === 'dark'"
-        (change)="setTheme($event)"
-        type="radio"
-        name="theme"
-        value="dark"
-        id="dark-theme"
-      />
-      <label for="dark-theme">Тёмная</label>
-    </div>
-    <div>
-      <input
-        type="radio"
-        name="theme"
-        [checked]="settingsService.theme === 'light'"
-        (change)="setTheme($event)"
-        value="light"
-        id="light-theme"
-      />
-      <label for="light-theme">Светлая</label>
+    <div class="settings__themes flex-container">
+      <div (click)="setTheme('dark')" [ngClass]="{ active: settingsService.theme === 'dark' }">
+        <img src="assets/dark_theme.png" alt="dark theme" />
+      </div>
+      <div (click)="setTheme('light')" [ngClass]="{ active: settingsService.theme === 'light' }">
+        <img src="assets/light_theme.png" alt="light theme" />
+      </div>
     </div>
   </div>
 </div>

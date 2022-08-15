@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SettingsService } from './settings.service';
+import { SettingsService, Theme } from './settings.service';
 
 @Component({
   selector: 'app-settings',
@@ -11,7 +11,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  setTheme($event) {
-    this.settingsService.theme = $event.target.value;
+  setTheme(theme: Theme) {
+    this.settingsService.theme = theme;
   }
 }

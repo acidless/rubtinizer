@@ -1,4 +1,9 @@
 .notes {
+  &__list {
+    flex-direction: column;
+    gap: 1.5em;
+  }
+
   h2,
   &__create {
     margin-bottom: 1em;
