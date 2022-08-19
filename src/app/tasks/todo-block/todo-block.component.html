@@ -4,7 +4,7 @@
     <p>{{ tasks.length }}</p>
   </div>
   <div class="todo-block__task-add item-container">
-    <button (click)="openWindow()">+</button>
+    <button (click)="openAddTaskWindow()">+</button>
   </div>
   <div class="todo-block__content flex-container">
     <app-task
@@ -13,26 +13,10 @@
       [categoryIndex]="categoryIndex"
       (onMoveEvent)="onTaskMove($event)"
       (onStopMoveEvent)="onTaskStopMove($event)"
+      [openAddSubtaskWindow]="openAddSubtaskWindow.bind(this)"
     ></app-task>
   </div>
+  <app-add-task [categoryIndex]="categoryIndex" [onAddTaskWindowOpened]="onAddTaskWindowOpened"></app-add-task>
+  <app-add-subtask [onAddSubtaskWindowOpened]="onAddSubtaskWindowOpened"></app-add-subtask>
   <div class="todo-block__move"></div>
-  <app-message-window [isOpened]="isOpened" (onClosed)="closeWindow()">
-    <form [formGroup]="form" (ngSubmit)="addTask()" class="add-task">
-      <div class="item-container">
-        <label for="title">Название</label>
-        <input formControlName="title" id="title" type="text" />
-      </div>
-      <div class="item-container">
-        <label for="description">Описание</label>
-        <textarea formControlName="content" id="description"></textarea>
-      </div>
-      <div class="item-container">
-        <label for="notificationTime">Время напоминания</label>
-        <input formControlName="notificationTime" type="time" id="notificationTime" />
-      </div>
-      <div class="item-container">
-        <button type="submit">Добавить</button>
-      </div>
-    </form>
-  </app-message-window>
 </div>

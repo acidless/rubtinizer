@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ElectronService } from './core/services';
-import { TranslateService } from '@ngx-translate/core';
 import { SettingsService } from './settings/settings.service';
+import { NotificationService } from './notification.service';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +8,7 @@ import { SettingsService } from './settings/settings.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(
-    private electronService: ElectronService,
-    private translate: TranslateService,
-    public settingsService: SettingsService
-  ) {
-    this.translate.setDefaultLang('en');
-  }
+  constructor(public settingsService: SettingsService, private notificationService: NotificationService) {}
 
   ngOnInit(): void {
     localStorage.setItem('date', new Date().toDateString());

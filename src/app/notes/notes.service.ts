@@ -1,31 +1,31 @@
 import { Injectable } from '@angular/core';
-import data from '../../../data.json';
 import { Note } from '../../types/note';
 import { ElectronService } from 'ngx-electron';
+import { DatabaseService } from '../database.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class NotesService {
-  constructor(private electronService: ElectronService) {
-    if (!data['notes']) {
-      data['notes'] = [];
-    }
+  data: Array<Note> = [];
+
+  constructor(private electronService: ElectronService, private databaseService: DatabaseService) {
+    this.databaseService.whenLoaded(async () => {
+      this.data = await this.databaseService.getAll('notes');
+    });
   }
 
   get notes() {
-    return data['notes'];
+    return this.data;
   }
 
   addNote(note: Note) {
-    data['notes'].push(note as any);
-    console.log(data);
-    this.electronService.ipcRenderer.send('tasks', ['save', data]);
-    console.log(data);
+    this.data.push(note as any);
+    this.databaseService.setData('notes', note);
   }
 
   removeNote(note: Note) {
-    data['notes'] = data['notes'].filter((_note) => _note.timestamp !== note.timestamp);
-    this.electronService.ipcRenderer.send('tasks', ['save', data]);
+    this.data = this.data.filter((_note) => _note.timestamp !== note.timestamp);
+    this.databaseService.removeData('notes', note.timestamp);
   }
 }

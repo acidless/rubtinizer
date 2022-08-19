@@ -107,6 +107,9 @@ button {
 .transparent-button {
   background: none;
   color: var(--main-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     color: var(--main-color--darker);
@@ -127,12 +130,27 @@ a {
   }
 }
 
+form {
+  h2 {
+    text-align: center;
+    margin-bottom: 1em;
+  }
+
+  .item-container:last-child {
+    margin-bottom: 0;
+  }
+}
+
 input,
 textarea {
   background: var(--main-bg);
   border: none;
   border-radius: 0.25em;
   padding: 0.5em 1em;
+}
+
+input[type="checkbox"] {
+  accent-color: var(--main-color);
 }
 
 textarea {

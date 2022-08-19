@@ -1,0 +1,15 @@
+.subtask {
+  align-items: center;
+  gap: 0.25em;
+  cursor: pointer;
+
+  &.completed {
+    p {
+      text-decoration: line-through;
+    }
+  }
+
+  p {
+    color: var(--text-color);
+  }
+}

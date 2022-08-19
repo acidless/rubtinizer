@@ -16,13 +16,23 @@ export class DatabaseService {
     openRequest.onupgradeneeded = () => {
       this.db = openRequest.result;
       if (!this.db.objectStoreNames.contains('tasks')) {
-        this.db.createObjectStore('tasks', { keyPath: 'date' });
+        const store = this.db.createObjectStore('tasks', { keyPath: 'date' });
+        store.createIndex('timestamp_idx', 'timestamp', { unique: false });
       }
 
       if (!this.db.objectStoreNames.contains('notes')) {
         this.db.createObjectStore('notes', { keyPath: 'timestamp' });
       }
     };
+  }
+
+  public whenLoaded(fn: Function) {
+    const interval = setInterval(() => {
+      if (this.db) {
+        fn();
+        clearInterval(interval);
+      }
+    }, 10);
   }
 
   public setData(storeName: string, data: any) {
@@ -39,20 +49,52 @@ export class DatabaseService {
       const transaction = this.db.transaction(storeName, 'readwrite');
       const store = transaction.objectStore(storeName);
 
+      const pdestroy = store
+        .index('timestamp_idx')
+        .openKeyCursor(IDBKeyRange.upperBound(Date.now() - 1000 * 3600 * 24));
+
+      pdestroy.onsuccess = function () {
+        const cursor = pdestroy.result;
+
+        if (cursor) {
+          store.delete(cursor.primaryKey);
+          cursor.continue();
+        }
+      };
+
       store.delete(key);
     }
   }
 
-  public getAll(storeName: string) {
+  public removeDataByIndex(storeName: string, index: any, value: any) {
     if (this.db) {
       const transaction = this.db.transaction(storeName, 'readwrite');
       const store = transaction.objectStore(storeName);
-      const request = store.getAll();
 
-      request.onsuccess = (result) => {
-        console.log(request.result);
+      const pdestroy = store.index(index).openKeyCursor(value);
+
+      pdestroy.onsuccess = function () {
+        const cursor = pdestroy.result;
+        if (cursor) {
+          store.delete(cursor.primaryKey);
+          cursor.continue();
+        }
       };
     }
+  }
+
+  public getAll(storeName: string): Promise<any> {
+    return new Promise((resolve) => {
+      if (this.db) {
+        const transaction = this.db.transaction(storeName, 'readwrite');
+        const store = transaction.objectStore(storeName);
+        const request = store.getAll();
+
+        request.onsuccess = () => {
+          resolve(request.result);
+        };
+      }
+    });
   }
 
   public async get(storeName: string, key): Promise<any> {
@@ -62,7 +104,7 @@ export class DatabaseService {
         const store = transaction.objectStore(storeName);
         const request = store.get(key);
 
-        request.onsuccess = (result) => {
+        request.onsuccess = () => {
           resolve(request.result);
         };
       }

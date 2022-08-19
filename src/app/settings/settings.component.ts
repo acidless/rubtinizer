@@ -14,4 +14,8 @@ export class SettingsComponent implements OnInit {
   setTheme(theme: Theme) {
     this.settingsService.theme = theme;
   }
+
+  setAutoDelete($event) {
+    this.settingsService.autodeleteInterval = $event.target.value;
+  }
 }

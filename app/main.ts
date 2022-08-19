@@ -86,28 +86,6 @@ try {
     }
   });
 
-  ipcMain.on('tasks', (event, args) => {
-    if (args[0] === 'save') {
-      let data = args[1];
-
-      Object.keys(data).forEach((key) => {
-        if (Date.now() - new Date(key).getTime() > 1000 * 3600 * 24 * 7) {
-          delete data[key];
-        }
-      });
-
-      saveFile(JSON.stringify(data));
-
-      event.returnValue = 1;
-    }
-  });
-
-  ipcMain.on('data', (event, args) => {
-    if (args[0] === 'get') {
-      event.returnValue = readFile();
-    }
-  });
-
   ipcMain.on('window', (event, args) => {
     switch (args[0]) {
       case 'close':
@@ -123,24 +101,15 @@ try {
   // throw e;
 }
 
-function saveFile(data: string) {
-  fs.writeFile('data.json', data, (err) => {
-    console.log(err);
-  });
-}
+ipcMain.on('notification', (event, args) => {
+  new Notification({
+    title: 'Вам нужно выполнить задачу!',
+    body: args[0].title,
+    icon: path.join(__dirname, 'rubtidnizer.png'),
+  }).show();
+});
 
-function readFile() {
-  fs.writeFile('data.json', '{}', { flag: 'wx' }, function (err) {});
-
-  try {
-    // @ts-ignore
-    return JSON.parse(fs.readFileSync('data.json'));
-  } catch (e) {
-    return null;
-  }
-}
-
-setInterval(() => {
+/*setInterval(() => {
   const data = readFile();
   const currentDate = new Date();
   const currentTasks: Array<Array<ToDoTask>> | null = data ? data[currentDate.toDateString()] : null;
@@ -158,4 +127,4 @@ setInterval(() => {
       }
     });
   }
-}, 1000 * 60);
+}, 1000 * 60);*/

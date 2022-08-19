@@ -1,4 +1,14 @@
-import { Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { Input } from '@angular/core';
 import { ToDoTask } from '../../../../types/task';
 import { TaskService } from './task.service';
@@ -17,6 +27,7 @@ interface OnMouseEventParams {
 export class TaskComponent implements OnInit, OnDestroy {
   @Input() task: ToDoTask;
   @Input() categoryIndex: number;
+  @Input() openAddSubtaskWindow: Function;
 
   @Output() onMoveEvent = new EventEmitter<OnMouseEventParams>();
   @Output() onStopMoveEvent = new EventEmitter<ToDoTask>();
@@ -26,6 +37,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   isMoving = false;
   baseRect: DOMRect;
+  isExpanded = false;
 
   constructor(private taskService: TaskService) {}
 
@@ -69,5 +81,9 @@ export class TaskComponent implements OnInit, OnDestroy {
 
   setEditingTask() {
     this.taskService.editingTask = { ...this.task };
+  }
+
+  expandClick() {
+    this.isExpanded = !this.isExpanded;
   }
 }

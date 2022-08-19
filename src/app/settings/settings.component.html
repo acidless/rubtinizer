@@ -1,14 +1,30 @@
 <div class="content settings">
   <h2>Настройки</h2>
-  <div class="settings__theme">
+  <div class="settings__theme settings__option">
     <h3>Цветовая тема</h3>
     <div class="settings__themes flex-container">
-      <div (click)="setTheme('dark')" [ngClass]="{ active: settingsService.theme === 'dark' }">
+      <div (click)="setTheme('dark')" [ngClass]="{ active: settingsService.settings.theme === 'dark' }">
         <img src="assets/dark_theme.png" alt="dark theme" />
       </div>
-      <div (click)="setTheme('light')" [ngClass]="{ active: settingsService.theme === 'light' }">
+      <div (click)="setTheme('light')" [ngClass]="{ active: settingsService.settings.theme === 'light' }">
         <img src="assets/light_theme.png" alt="light theme" />
       </div>
+    </div>
+  </div>
+
+  <div class="settings__option">
+    <h3>Автоудаление задач</h3>
+    <div class="settings__autodelete">
+      <input
+        (change)="setAutoDelete($event)"
+        [value]="settingsService.settings.autoDeleteInterval"
+        type="range"
+        min="1"
+        max="30"
+      />
+      <p>
+        Удалять задачи, выполненные <span>{{ settingsService.settings.autoDeleteInterval }}</span> дней назад
+      </p>
     </div>
   </div>
 </div>

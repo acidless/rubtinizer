@@ -6,11 +6,19 @@
   (mouseup)="onMouseUp($event)"
 >
   <div class="task__title flex-container">
-    <h4>{{ task.title }}</h4>
-    <button (click)="setEditingTask()" class="transparent-button">
+    <div class="task__title-left flex-container">
+      <button (click)="expandClick()" class="task__expand transparent-button">
+        <span [ngClass]="{ expanded: isExpanded }" class="material-icons"> expand_more </span>
+      </button>
+      <h4>{{ task.title }}</h4>
+    </div>
+    <button (click)="setEditingTask()" class="task__edit-btn transparent-button">
       <span class="material-icons"> edit </span>
     </button>
   </div>
-
   <p *ngIf="task.content">{{ task.content }}</p>
+  <div class="task__subtasks flex-container" [ngClass]="{ active: isExpanded }">
+    <button (click)="openAddSubtaskWindow(task)">+</button>
+    <app-subtask *ngFor="let subtask of task.subtasks" [subtask]="subtask" [task]="task"></app-subtask>
+  </div>
 </div>

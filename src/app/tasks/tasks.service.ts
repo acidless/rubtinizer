@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ElectronService } from 'ngx-electron';
 import { ToDoTask } from '../../types/task';
-import { DataService } from '../data.service';
 import { DatabaseService } from '../database.service';
+import { SettingsService } from '../settings/settings.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,44 +11,39 @@ export class TasksService {
   tasks: Array<Array<ToDoTask>> = this.initTasks();
   data: any;
 
-  constructor(
-    private electronService: ElectronService,
-    private dataService: DataService,
-    private databaseService: DatabaseService
-  ) {}
+  constructor(private databaseService: DatabaseService, private settingsService: SettingsService) {
+    this.databaseService.whenLoaded(async () => {
+      this.databaseService.removeDataByIndex(
+        'tasks',
+        'timestamp_idx',
+        IDBKeyRange.upperBound(Date.now() - 1000 * 3600 * 24 * this.settingsService.settings.autoDeleteInterval)
+      );
+    });
+  }
 
-  loadTasks() {
-    setTimeout(async () => {
+  async loadTasks() {
+    this.databaseService.whenLoaded(async () => {
+      this.currentDate = new Date(localStorage.getItem('date'));
+
       const result = await this.databaseService.get('tasks', this.currentDate.toDateString());
-
       if (!result) {
-        this.databaseService.setData('tasks', { date: this.currentDate.toDateString(), tasks: [[], [], []] });
+        this.tasks = this.initTasks();
+        this.data = this.tasks;
+
+        this.databaseService.setData('tasks', {
+          date: this.currentDate.toDateString(),
+          tasks: this.tasks,
+          timestamp: this.currentDate.getTime(),
+        });
       } else {
         this.tasks = result.tasks;
+        this.data = result.tasks;
       }
-    }, 1000);
-    this.data = this.dataService.getData();
-
-    this.currentDate = new Date(localStorage.getItem('date'));
-    const currentDayTaks = this.data[this.currentDate.toDateString()];
-
-    if (currentDayTaks) {
-      this.tasks = [...currentDayTaks];
-    } else {
-      this.data[this.currentDate.toDateString()] = this.initTasks();
-      this.tasks = this.initTasks();
-    }
+    });
   }
 
   saveTasks(date = this.currentDate) {
-    const currentDateIndex = date.toDateString();
-
-    if (!this.isTasksEmpty(this.tasks) || !this.isTasksEmpty(this.data[currentDateIndex])) {
-      this.data[currentDateIndex] = [...this.tasks];
-      this.electronService.ipcRenderer.send('tasks', ['save', this.data]);
-    }
-
-    //this.databaseService.setData('tasks', { date: new Date().toLocaleDateString(), ...task });
+    this.databaseService.setData('tasks', { date: date.toDateString(), tasks: this.tasks, timestamp: date.getTime() });
 
     localStorage.setItem('date', this.currentDate.toDateString());
   }
@@ -57,10 +51,6 @@ export class TasksService {
   copyTasksToNextDay() {
     const nextDate = new Date(this.currentDate).setDate(this.currentDate.getDate() + 1);
     this.saveTasks(new Date(nextDate));
-  }
-
-  private isTasksEmpty(tasks: Array<Array<ToDoTask>>) {
-    return tasks.every((arr) => arr.length === 0);
   }
 
   private initTasks() {

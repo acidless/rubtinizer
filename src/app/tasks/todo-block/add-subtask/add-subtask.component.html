@@ -1,0 +1,12 @@
+<app-message-window [isOpened]="isOpened" (onClosed)="closeWindow()">
+  <form [formGroup]="form" (ngSubmit)="addSubtask()" class="add-task">
+    <h2>Добавить подзадачу</h2>
+    <div class="item-container">
+      <label for="title">Название</label>
+      <input formControlName="content" id="title" type="text" />
+    </div>
+    <div class="item-container">
+      <button type="submit">Добавить</button>
+    </div>
+  </form>
+</app-message-window>

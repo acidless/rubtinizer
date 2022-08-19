@@ -9,6 +9,9 @@ import { TasksMenuComponent } from './tasks-menu/tasks-menu.component';
 import { TasksSearchComponent } from './tasks-search/tasks-search.component';
 import { TasksFilterPipe } from '../pipes/tasks-filter.pipe';
 import { ChangeTaskComponent } from './change-task/change-task.component';
+import { AddTaskComponent } from './todo-block/add-task/add-task.component';
+import { AddSubtaskComponent } from './todo-block/add-subtask/add-subtask.component';
+import { SubtaskComponent } from './todo-block/task/subtask/subtask.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,9 @@ import { ChangeTaskComponent } from './change-task/change-task.component';
     TasksSearchComponent,
     TasksFilterPipe,
     ChangeTaskComponent,
+    AddTaskComponent,
+    AddSubtaskComponent,
+    SubtaskComponent,
   ],
   imports: [CommonModule, MiscModule, FormsModule, ReactiveFormsModule],
 })

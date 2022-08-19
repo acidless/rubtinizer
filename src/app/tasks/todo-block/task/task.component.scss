@@ -17,12 +17,31 @@
         color: var(--text-color);
         transition: 0.3s color, 0.3s transform ease-in-out;
       }
+    }
 
-      &:hover {
-        span {
-          transform: scale(1.1) rotateZ(5deg);
-          color: var(--main-color);
-        }
+    .task__edit-btn:hover {
+      span {
+        transform: scale(1.1) rotateZ(5deg);
+        color: var(--main-color);
+      }
+    }
+  }
+
+  &__title-left {
+    align-items: center;
+    gap: 0.25em;
+  }
+
+  .task__expand {
+    &:hover {
+      span {
+        color: var(--main-color);
+      }
+    }
+
+    span {
+      &.expanded {
+        transform: rotateZ(180deg);
       }
     }
   }
@@ -35,5 +54,24 @@
   p {
     margin-top: 0.5em;
     color: var(--text-color);
+  }
+
+  &__subtasks {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    flex-direction: column;
+    gap: 0.5em;
+    transition: 0.3s opacity ease-in-out;
+
+    &.active {
+      margin-top: 1em;
+      height: min-content;
+      opacity: 1;
+    }
+
+    button {
+      width: 100%;
+    }
   }
 }

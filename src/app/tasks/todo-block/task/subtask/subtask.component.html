@@ -1,0 +1,4 @@
+<div class="flex-container subtask" [ngClass]="{ completed: subtask.completed }" (click)="changeTask()">
+  <input type="checkbox" [checked]="subtask.completed" />
+  <p>{{ subtask.content }}</p>
+</div>

@@ -3,22 +3,17 @@ import { ToDoTask } from '../../../../types/task';
 import { IsPointInRect } from '../../../../utils';
 import { TasksService } from '../../tasks.service';
 import { TasksCategoriesService } from '../tasks-categories.service';
-import { Subscriber } from 'rxjs';
-import { DatabaseService } from '../../../database.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService {
   isTaskMoving = false;
-  private taskDeleteBlock: ElementRef | undefined;
-  public editingTask: ToDoTask | undefined;
+  editingTask: ToDoTask | undefined;
 
-  constructor(
-    private tasksService: TasksService,
-    private tasksCategoriesService: TasksCategoriesService,
-    private databaseService: DatabaseService
-  ) {}
+  private taskDeleteBlock: ElementRef | undefined;
+
+  constructor(private tasksService: TasksService, private tasksCategoriesService: TasksCategoriesService) {}
 
   setTaskDeleteBlock(taskDeleteBlock) {
     this.taskDeleteBlock = taskDeleteBlock;

@@ -2,11 +2,11 @@
   <div class="claendar-wrapper">
     <div class="calendar-inner">
       <div class="calendar-title flex-container">
-        <button (click)="monthBack()"><</button>
+        <button (click)="this.calendarService.monthBack()"><</button>
         <h1>
-          {{ months[this.month] }}, <span>{{ this.year }}</span>
+          {{ this.calendarService.month }}, <span>{{ this.calendarService.year }}</span>
         </h1>
-        <button (click)="monthNext()">{{ ">" }}</button>
+        <button (click)="this.calendarService.monthNext()">{{ ">" }}</button>
       </div>
       <div class="calendar">
         <div class="calendar__header">
@@ -18,12 +18,12 @@
           <h2>Сб</h2>
           <h2>Вс</h2>
         </div>
-        <div class="calendar__data" *ngFor="let week of dates">
+        <div class="calendar__data" *ngFor="let week of this.calendarService.dates">
           <div
             *ngFor="let day of week"
             class="calendar__day"
-            [ngClass]="{ active: isActiveDate(day?.date) }"
-            (click)="setActiveDate(day?.date)"
+            [ngClass]="{ active: this.calendarService.isActiveDate(day?.date) }"
+            (click)="this.calendarService.setActiveDate(day?.date)"
           >
             <div *ngIf="day">
               <p>{{ day?.date.getDate() }}</p>
@@ -37,9 +37,12 @@
       </div>
     </div>
 
-    <div *ngIf="activeDate.tasks[0].length" class="uncompleted-tasks">
+    <div
+      *ngIf="this.calendarService.activeDate && this.calendarService.activeDate.tasks[0].length"
+      class="uncompleted-tasks"
+    >
       <h3>Невыполненные задачи</h3>
-      <div class="uncompleted-tasks__task" *ngFor="let task of activeDate.tasks[0]">
+      <div class="uncompleted-tasks__task" *ngFor="let task of this.calendarService.activeDate.tasks[0]">
         <p>{{ task.title }}</p>
       </div>
     </div>

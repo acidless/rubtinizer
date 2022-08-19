@@ -2,27 +2,42 @@ import { Injectable } from '@angular/core';
 
 export type Theme = 'dark' | 'light';
 
+type Settings = {
+  theme: Theme;
+  autoDeleteInterval: number;
+};
+
 @Injectable({
   providedIn: 'root',
 })
 export class SettingsService {
-  public mTheme: Theme = 'dark';
+  private settingsData: Settings = { theme: 'dark', autoDeleteInterval: 7 };
 
   constructor() {
     const dataStr = localStorage.getItem('settings') ?? '{}';
     const data = JSON.parse(dataStr);
 
     if (data.theme) {
-      this.theme = data.theme;
+      this.settingsData.theme = data.theme;
+      this.settingsData.autoDeleteInterval = data.autoDeleteInterval;
     }
   }
 
-  get theme() {
-    return this.mTheme;
+  get settings() {
+    return this.settingsData;
   }
 
   set theme(value) {
-    this.mTheme = value;
-    localStorage.setItem('settings', JSON.stringify({ theme: this.theme }));
+    this.settingsData.theme = value;
+    localStorage.setItem('settings', JSON.stringify({ ...this.settingsData, theme: this.settingsData.theme }));
+  }
+
+  set autodeleteInterval(value) {
+    this.settingsData.autoDeleteInterval = value;
+
+    localStorage.setItem(
+      'settings',
+      JSON.stringify({ ...this.settingsData, autoDeleteInterval: this.settingsData.autoDeleteInterval })
+    );
   }
 }
