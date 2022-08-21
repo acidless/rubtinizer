@@ -2,7 +2,6 @@ import { app, BrowserWindow, screen, ipcMain, Notification } from 'electron';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as url from 'url';
-import { ToDoTask } from '../src/types/task';
 
 let win: BrowserWindow = null;
 const args = process.argv.slice(1),
@@ -109,22 +108,9 @@ ipcMain.on('notification', (event, args) => {
   }).show();
 });
 
-/*setInterval(() => {
-  const data = readFile();
-  const currentDate = new Date();
-  const currentTasks: Array<Array<ToDoTask>> | null = data ? data[currentDate.toDateString()] : null;
-
-  if (currentTasks) {
-    currentTasks[0].forEach((task) => {
-      if (task.notificationTime) {
-        if (currentDate.toLocaleTimeString().substring(0, 5) == task.notificationTime) {
-          new Notification({
-            title: 'Вам нужно выполнить задачу!',
-            body: task.title,
-            icon: path.join(__dirname, 'rubtidnizer.png'),
-          }).show();
-        }
-      }
-    });
-  }
-}, 1000 * 60);*/
+ipcMain.on('auto-launch', (event, args) => {
+  app.setLoginItemSettings({
+    openAtLogin: args,
+    path: app.getPath('exe'),
+  });
+});

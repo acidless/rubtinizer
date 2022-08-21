@@ -27,4 +27,13 @@
       </p>
     </div>
   </div>
+  <div class="settings__option settings__autolaunch flex-container">
+    <input
+      id="auto-launch"
+      (change)="setAutoLaunch()"
+      [defaultChecked]="settingsService.settings.autoLaunch"
+      type="checkbox"
+    />
+    <label for="auto-launch">Запускать при старте системы</label>
+  </div>
 </div>

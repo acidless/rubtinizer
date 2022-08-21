@@ -18,4 +18,8 @@ export class SettingsComponent implements OnInit {
   setAutoDelete($event) {
     this.settingsService.autodeleteInterval = $event.target.value;
   }
+
+  setAutoLaunch() {
+    this.settingsService.autoLaunchValue = !this.settingsService.settings.autoLaunch;
+  }
 }
