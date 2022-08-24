@@ -24,9 +24,16 @@
   }
 }
 
+.claendar-wrapper {
+  justify-content: stretch;
+  flex-direction: column;
+  align-items: center;
+}
+
 .calendar-inner {
-  width: fit-content;
+  max-width: 1400px;
   margin-bottom: 2em;
+  width: 100%;
 }
 
 .calendar {
@@ -36,6 +43,10 @@
     grid-gap: 3em;
     padding: 0 1.5em;
     margin-bottom: 1em;
+
+    h2 {
+      text-align: center;
+    }
   }
 
   &__data {

@@ -30,6 +30,10 @@
   &__title-left {
     align-items: center;
     gap: 0.25em;
+
+    h4 {
+      word-break: break-word;
+    }
   }
 
   .task__expand {
@@ -54,6 +58,7 @@
   p {
     margin-top: 0.5em;
     color: var(--text-color);
+    word-break: break-word;
   }
 
   &__subtasks {
