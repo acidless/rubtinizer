@@ -31,8 +31,6 @@ export class AddSubtaskComponent implements OnInit {
     if (this.form.status === 'VALID' && this.task) {
       this.subtaskService.addSubtask(this.task, {
         content: this.form.value.content,
-        timestamp: Date.now(),
-        completed: false,
       });
 
       this.form.reset();

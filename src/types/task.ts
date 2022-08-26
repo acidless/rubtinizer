@@ -7,5 +7,5 @@ export type ToDoTask = Note & {
 };
 
 export type Subtask = Note & {
-  completed: boolean;
+  completed?: boolean;
 };

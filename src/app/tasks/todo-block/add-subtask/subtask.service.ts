@@ -9,7 +9,7 @@ export class SubtaskService {
   constructor(private tasksService: TasksService) {}
 
   addSubtask(task: ToDoTask, subtask: Subtask) {
-    task.subtasks.push(subtask);
+    task.subtasks.push({ ...subtask, timestamp: Date.now(), completed: false });
     this.tasksService.saveTasks();
   }
 

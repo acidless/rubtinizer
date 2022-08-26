@@ -18,7 +18,7 @@ export class NotesComponent implements OnInit {
     const value = this.note.trim();
 
     if (value) {
-      this.noteService.addNote({ content: value, timestamp: Date.now() });
+      this.noteService.addNote({ content: value });
       this.note = '';
     }
   }

@@ -1,0 +1,16 @@
+.labels {
+  h2 {
+    margin-bottom: 1em;
+  }
+
+  &__list {
+    flex-wrap: wrap;
+    gap: 1em;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__add-btn {
+    margin: 0;
+  }
+}

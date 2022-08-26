@@ -1,0 +1,16 @@
+<app-message-window [isOpened]="isOpened" (onClosed)="closeWindow()">
+  <form [formGroup]="form" (ngSubmit)="addLabel()" class="add-label">
+    <h2>Добавить метку</h2>
+    <div class="item-container">
+      <label for="title">Название</label>
+      <input formControlName="title" id="title" type="text" />
+    </div>
+    <div class="item-container">
+      <label for="color">Цвет</label>
+      <input type="color" formControlName="color" id="color" />
+    </div>
+    <div class="item-container">
+      <button type="submit">Добавить</button>
+    </div>
+  </form>
+</app-message-window>

@@ -7,7 +7,7 @@ import { DatabaseService } from '../database.service';
   providedIn: 'root',
 })
 export class NotesService {
-  data: Array<Note> = [];
+  private data: Array<Note> = [];
 
   constructor(private electronService: ElectronService, private databaseService: DatabaseService) {
     this.databaseService.whenLoaded(async () => {
@@ -20,6 +20,8 @@ export class NotesService {
   }
 
   addNote(note: Note) {
+    note.timestamp = Date.now();
+
     this.data.push(note as any);
     this.databaseService.setData('notes', note);
   }

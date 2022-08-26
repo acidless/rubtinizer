@@ -1,0 +1,9 @@
+<div class="content labels">
+  <h2>Метки</h2>
+  <section class="labels__list flex-container">
+    <app-label *ngFor="let label of labelSerive.labels" [label]="label"></app-label>
+    <button class="labels__add-btn" (click)="openAddLabelWindow()">+</button>
+  </section>
+
+  <app-add-label [onAddLabelWindowOpened]="onAddLabelWindowOpened"></app-add-label>
+</div>

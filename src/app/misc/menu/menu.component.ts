@@ -6,7 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
+  isTaskLinkOpened = false;
+
   constructor() {}
 
   ngOnInit(): void {}
+
+  toggleTaskList(event) {
+    event.preventDefault();
+    event.stopPropagation();
+
+    this.isTaskLinkOpened = !this.isTaskLinkOpened;
+  }
 }

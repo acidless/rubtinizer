@@ -23,6 +23,10 @@ export class DatabaseService {
       if (!this.db.objectStoreNames.contains('notes')) {
         this.db.createObjectStore('notes', { keyPath: 'timestamp' });
       }
+
+      if (!this.db.objectStoreNames.contains('labels')) {
+        this.db.createObjectStore('labels', { keyPath: 'timestamp' });
+      }
     };
   }
 
@@ -48,19 +52,6 @@ export class DatabaseService {
     if (this.db) {
       const transaction = this.db.transaction(storeName, 'readwrite');
       const store = transaction.objectStore(storeName);
-
-      const pdestroy = store
-        .index('timestamp_idx')
-        .openKeyCursor(IDBKeyRange.upperBound(Date.now() - 1000 * 3600 * 24));
-
-      pdestroy.onsuccess = function () {
-        const cursor = pdestroy.result;
-
-        if (cursor) {
-          store.delete(cursor.primaryKey);
-          cursor.continue();
-        }
-      };
 
       store.delete(key);
     }

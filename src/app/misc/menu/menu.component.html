@@ -1,8 +1,19 @@
 <div class="menu flex-container">
   <nav>
-    <a class="flex-container" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
-      ><span class="material-icons"> task_alt </span>Задачи</a
-    >
+    <div class="menu__link-list">
+      <a class="flex-container" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        ><span class="material-icons"> task_alt </span>Задачи
+        <button (click)="toggleTaskList($event)" class="transparent-button" [ngClass]="{ opened: isTaskLinkOpened }">
+          <span class="material-icons button-icon"> keyboard_arrow_down </span>
+        </button></a
+      >
+      <div class="menu__link-list-content" [ngClass]="{ active: isTaskLinkOpened }">
+        <a class="flex-container" routerLink="/labels" routerLinkActive="active"
+          ><span class="material-icons"> bookmark </span>Метки
+        </a>
+      </div>
+    </div>
+
     <a class="flex-container" routerLink="/calendar" routerLinkActive="active"
       ><span class="material-icons"> calendar_month </span>Календарь</a
     >

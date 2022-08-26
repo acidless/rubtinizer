@@ -19,6 +19,7 @@ import { CalendarModule } from './calendar/calendar.module';
 import { NgxElectronModule } from 'ngx-electron';
 import { NotesModule } from './notes/notes.module';
 import { SettingsModule } from './settings/settings.module';
+import { LabelsModule } from './labels/labels.module';
 
 registerLocaleData(localeRu);
 
@@ -46,6 +47,7 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
     NotesModule,
     NgxElectronModule,
     SettingsModule,
+    LabelsModule,
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru' }],
   bootstrap: [AppComponent],

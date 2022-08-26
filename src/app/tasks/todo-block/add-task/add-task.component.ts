@@ -27,6 +27,10 @@ export class AddTaskComponent implements OnInit {
     });
   }
 
+  openWindow() {
+    this.isOpened = true;
+  }
+
   closeWindow() {
     this.isOpened = false;
   }
@@ -34,16 +38,12 @@ export class AddTaskComponent implements OnInit {
   addTask() {
     if (this.form.status === 'VALID') {
       this.taskService.addTask({
-        task: { ...this.form.value, subtasks: [], timestamp: Date.now() },
+        task: this.form.value,
         index: this.categoryIndex,
       });
 
       this.form.reset();
       this.closeWindow();
     }
-  }
-
-  openWindow() {
-    this.isOpened = true;
   }
 }

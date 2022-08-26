@@ -153,6 +153,11 @@ input[type="checkbox"] {
   accent-color: var(--main-color);
 }
 
+input[type="color"] {
+  background: none;
+  height: 5em;
+}
+
 textarea {
   resize: vertical;
   max-height: 50em;

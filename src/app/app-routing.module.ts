@@ -4,6 +4,7 @@ import { TasksComponent } from './tasks/tasks.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { SettingsComponent } from './settings/settings.component';
 import { NotesComponent } from './notes/notes.component';
+import { LabelsComponent } from './labels/labels.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,11 @@ const routes: Routes = [
     path: 'settings',
     pathMatch: 'full',
     component: SettingsComponent,
+  },
+  {
+    path: 'labels',
+    pathMatch: 'full',
+    component: LabelsComponent,
   },
 ];
 

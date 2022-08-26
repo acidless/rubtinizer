@@ -1,0 +1,24 @@
+.label {
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  gap: 1em;
+
+  h3 {
+    color: var(--text-color);
+  }
+
+  .transparent-button {
+    padding: 0;
+    margin: 0;
+
+    span {
+      font-size: 2rem;
+    }
+
+    &:hover {
+      span {
+        color: var(--main-color);
+      }
+    }
+  }
+}
