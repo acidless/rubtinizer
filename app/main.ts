@@ -109,8 +109,10 @@ ipcMain.on('notification', (event, args) => {
 });
 
 ipcMain.on('auto-launch', (event, args) => {
-  app.setLoginItemSettings({
-    openAtLogin: args,
-    path: app.getPath('exe'),
-  });
+  if (serve) {
+    app.setLoginItemSettings({
+      openAtLogin: args,
+      path: app.getPath('exe'),
+    });
+  }
 });

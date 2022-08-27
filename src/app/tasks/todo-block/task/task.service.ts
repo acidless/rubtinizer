@@ -20,7 +20,7 @@ export class TaskService {
   }
 
   addTask({ task, index }) {
-    this.tasksService.tasks[index].push({ ...task, timestamp: Date.now(), subtasks: [] });
+    this.tasksService.tasks[index].push({ ...task, timestamp: Date.now(), subtasks: [], labels: [] });
     this.tasksService.saveTasks();
   }
 

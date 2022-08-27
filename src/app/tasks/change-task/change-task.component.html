@@ -1,4 +1,4 @@
-<app-message-window [isOpened]="isOpened" (onClosed)="closeWindow()">
+<app-message-window *ngIf="editingTask" [isOpened]="isOpened" (onClosed)="closeWindow()">
   <form [formGroup]="taskEditForm" (ngSubmit)="changeTask()" class="change-task">
     <div class="item-container">
       <label for="title">Название</label>
@@ -7,6 +7,13 @@
     <div class="item-container">
       <label for="description">Описание</label>
       <textarea formControlName="content" id="description"></textarea>
+    </div>
+    <div class="item-container labels-select">
+      <label>Метки</label>
+      <div class="flex-container">
+        <app-label *ngFor="let label of labels" [label]="label" [onRemove]="removeLabel.bind(this)"></app-label>
+        <button (click)="addLabel()" type="button">+</button>
+      </div>
     </div>
     <div class="item-container">
       <label for="notificationTime">Время напоминания</label>

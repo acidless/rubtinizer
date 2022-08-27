@@ -1,15 +1,19 @@
 .label {
+  align-items: center;
   padding: 0.5em 1em;
   border-radius: 0.5em;
   gap: 1em;
 
   h3 {
     color: var(--text-color);
+    font-size: 1.25rem;
   }
 
   .transparent-button {
     padding: 0;
     margin: 0;
+    align-items: center;
+    height: 1.25em;
 
     span {
       font-size: 2rem;

@@ -1,0 +1,20 @@
+.labels-select {
+  button {
+    display: block;
+    width: min-content;
+    margin: 0;
+  }
+
+  .flex-container {
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1em;
+  }
+}
+
+.labels-list {
+  margin-top: 1em;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1em;
+}

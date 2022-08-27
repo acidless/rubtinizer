@@ -9,5 +9,6 @@ import { MiscModule } from '../misc/misc.module';
 @NgModule({
   declarations: [LabelsComponent, LabelComponent, AddLabelComponent],
   imports: [CommonModule, ReactiveFormsModule, MiscModule],
+  exports: [LabelComponent],
 })
 export class LabelsModule {}

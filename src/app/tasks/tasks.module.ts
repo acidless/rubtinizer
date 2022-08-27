@@ -12,6 +12,7 @@ import { ChangeTaskComponent } from './change-task/change-task.component';
 import { AddTaskComponent } from './todo-block/add-task/add-task.component';
 import { AddSubtaskComponent } from './todo-block/add-subtask/add-subtask.component';
 import { SubtaskComponent } from './todo-block/task/subtask/subtask.component';
+import {LabelsModule} from "../labels/labels.module";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,6 @@ import { SubtaskComponent } from './todo-block/task/subtask/subtask.component';
     AddSubtaskComponent,
     SubtaskComponent,
   ],
-  imports: [CommonModule, MiscModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, MiscModule, FormsModule, ReactiveFormsModule, LabelsModule],
 })
 export class TasksModule {}

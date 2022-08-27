@@ -8,13 +8,19 @@ import { LabelsService } from '../labels.service';
   styleUrls: ['./label.component.scss'],
 })
 export class LabelComponent implements OnInit {
+  @Input() showDeleteButton = true;
   @Input() label: Label;
+  @Input() onRemove: Function;
 
   constructor(private labelsService: LabelsService) {}
 
   ngOnInit(): void {}
 
   removeLabel() {
+    if (this.onRemove) {
+      return this.onRemove(this.label);
+    }
+
     this.labelsService.removeLabel(this.label);
   }
 }

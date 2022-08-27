@@ -17,6 +17,9 @@
     </button>
   </div>
   <p *ngIf="task.content">{{ task.content }}</p>
+  <div *ngIf="task.labels.length" class="flex-container labels-list">
+    <app-label *ngFor="let label of task.labels" [label]="label" [showDeleteButton]="false"></app-label>
+  </div>
   <div class="task__subtasks flex-container" [ngClass]="{ active: isExpanded }">
     <button (click)="openAddSubtaskWindow(task)">+</button>
     <app-subtask *ngFor="let subtask of task.subtasks" [subtask]="subtask" [task]="task"></app-subtask>
