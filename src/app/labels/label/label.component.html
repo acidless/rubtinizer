@@ -1,4 +1,4 @@
-<div class="label flex-container" [ngStyle]="{ background: label.color }">
+<div (click)="onClick(label)" class="label flex-container" [ngStyle]="{ background: label.color }">
   <h3>{{ label.title }}</h3>
   <button *ngIf="showDeleteButton" (click)="removeLabel()" class="transparent-button flex-container" type="button">
     <span class="material-icons"> close </span>

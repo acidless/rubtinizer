@@ -10,7 +10,8 @@ import { LabelsService } from '../labels.service';
 export class LabelComponent implements OnInit {
   @Input() showDeleteButton = true;
   @Input() label: Label;
-  @Input() onRemove: Function;
+  @Input() onRemove?: Function;
+  @Input() onClick: Function = (label: Label) => {};
 
   constructor(private labelsService: LabelsService) {}
 

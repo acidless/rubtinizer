@@ -1,0 +1,10 @@
+<app-message-window [isOpened]="isOpened" (onClosed)="closeWindow()">
+  <div class="labels-list add-labels-list flex-container">
+    <app-label
+      *ngFor="let label of labelService.labels"
+      [showDeleteButton]="false"
+      [label]="label"
+      [onClick]="addLabelClick.bind(this)"
+    ></app-label>
+  </div>
+</app-message-window>

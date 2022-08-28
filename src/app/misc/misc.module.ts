@@ -4,9 +4,10 @@ import { MessageWindowComponent } from './message-window/message-window.componen
 import { MenuComponent } from './menu/menu.component';
 import { RouterModule } from '@angular/router';
 import { TopbarComponent } from './topbar/topbar.component';
+import { MessageWindowBaseComponent } from './message-window-base/message-window-base.component';
 
 @NgModule({
-  declarations: [MessageWindowComponent, MenuComponent, TopbarComponent],
+  declarations: [MessageWindowComponent, MenuComponent, TopbarComponent, MessageWindowBaseComponent],
   imports: [CommonModule, RouterModule],
   exports: [MessageWindowComponent, MenuComponent, TopbarComponent],
 })

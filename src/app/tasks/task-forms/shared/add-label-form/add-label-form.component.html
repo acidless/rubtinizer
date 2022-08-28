@@ -1,0 +1,12 @@
+<div class="item-container labels-select">
+  <label>Метки</label>
+  <div class="flex-container">
+    <app-label
+      *ngFor="let label of taskLabelService.labels"
+      [label]="label"
+      [onRemove]="taskLabelService.removeLabel.bind(taskLabelService)"
+    ></app-label>
+    <button (click)="onAddLabelClick()" type="button">+</button>
+  </div>
+</div>
+<app-add-task-label [onOpenedEvent]="onAddTaskLabelWindowOpened"></app-add-task-label>

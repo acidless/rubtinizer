@@ -16,7 +16,7 @@
       [openAddSubtaskWindow]="openAddSubtaskWindow.bind(this)"
     ></app-task>
   </div>
-  <app-add-task [categoryIndex]="categoryIndex" [onAddTaskWindowOpened]="onAddTaskWindowOpened"></app-add-task>
-  <app-add-subtask [onAddSubtaskWindowOpened]="onAddSubtaskWindowOpened"></app-add-subtask>
+  <app-add-task [categoryIndex]="categoryIndex" [onOpenedEvent]="onAddTaskWindowOpened"></app-add-task>
+  <app-add-subtask [onOpenedEvent]="onAddSubtaskWindowOpened"></app-add-subtask>
   <div class="todo-block__move"></div>
 </div>

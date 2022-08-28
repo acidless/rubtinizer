@@ -38,7 +38,7 @@
     padding: 2em;
     border-radius: 0.5em;
     width: 40em;
-    overflow: auto;
+    overflow: hidden;
     max-height: calc(100vh - 3em);
 
     &__content {

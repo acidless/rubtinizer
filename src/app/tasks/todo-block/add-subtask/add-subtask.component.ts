@@ -2,26 +2,26 @@ import { Component, EventEmitter, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SubtaskService } from './subtask.service';
 import { ToDoTask } from '../../../../types/task';
+import { MessageWindowBaseComponent } from '../../../misc/message-window-base/message-window-base.component';
 
 @Component({
   selector: 'app-add-subtask',
   templateUrl: './add-subtask.component.html',
   styleUrls: ['./add-subtask.component.scss'],
 })
-export class AddSubtaskComponent implements OnInit {
-  @Input() onAddSubtaskWindowOpened: EventEmitter<ToDoTask>;
+export class AddSubtaskComponent extends MessageWindowBaseComponent implements OnInit {
   task: ToDoTask | null;
-
-  isOpened = false;
 
   form = new FormGroup({
     content: new FormControl('', [Validators.max(64)]),
   });
 
-  constructor(private subtaskService: SubtaskService) {}
+  constructor(private subtaskService: SubtaskService) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.onAddSubtaskWindowOpened.subscribe((task) => {
+    this.onOpenedEvent.subscribe((task) => {
       this.task = task;
       this.openWindow();
     });
@@ -36,13 +36,5 @@ export class AddSubtaskComponent implements OnInit {
       this.form.reset();
       this.closeWindow();
     }
-  }
-
-  closeWindow() {
-    this.isOpened = false;
-  }
-
-  openWindow() {
-    this.isOpened = true;
   }
 }

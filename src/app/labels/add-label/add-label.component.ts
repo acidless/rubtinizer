@@ -1,37 +1,22 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { LabelsService } from '../labels.service';
 import { RandomColor } from '../../../utils';
+import { MessageWindowBaseComponent } from '../../misc/message-window-base/message-window-base.component';
 
 @Component({
   selector: 'app-add-label',
   templateUrl: './add-label.component.html',
   styleUrls: ['./add-label.component.scss'],
 })
-export class AddLabelComponent implements OnInit {
-  @Input() onAddLabelWindowOpened: EventEmitter<void>;
-
+export class AddLabelComponent extends MessageWindowBaseComponent {
   form = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.max(32)]),
     color: new FormControl(RandomColor()),
   });
 
-  isOpened = false;
-
-  constructor(private labelSerive: LabelsService) {}
-
-  ngOnInit(): void {
-    this.onAddLabelWindowOpened.subscribe(() => {
-      this.openWindow();
-    });
-  }
-
-  openWindow() {
-    this.isOpened = true;
-  }
-
-  closeWindow() {
-    this.isOpened = false;
+  constructor(private labelSerive: LabelsService) {
+    super();
   }
 
   addLabel() {

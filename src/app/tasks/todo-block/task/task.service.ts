@@ -3,6 +3,7 @@ import { ToDoTask } from '../../../../types/task';
 import { IsPointInRect } from '../../../../utils';
 import { TasksService } from '../../tasks.service';
 import { TasksCategoriesService } from '../tasks-categories.service';
+import { TaskLabelService } from '../../task-forms/shared/add-label-form/task-label.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,15 +14,25 @@ export class TaskService {
 
   private taskDeleteBlock: ElementRef | undefined;
 
-  constructor(private tasksService: TasksService, private tasksCategoriesService: TasksCategoriesService) {}
+  constructor(
+    private tasksService: TasksService,
+    private tasksCategoriesService: TasksCategoriesService,
+    private taskLabelService: TaskLabelService
+  ) {}
 
   setTaskDeleteBlock(taskDeleteBlock) {
     this.taskDeleteBlock = taskDeleteBlock;
   }
 
   addTask({ task, index }) {
-    this.tasksService.tasks[index].push({ ...task, timestamp: Date.now(), subtasks: [], labels: [] });
+    this.tasksService.tasks[index].push({
+      ...task,
+      timestamp: Date.now(),
+      subtasks: [],
+      labels: [...this.taskLabelService.labels],
+    });
     this.tasksService.saveTasks();
+    this.taskLabelService.labels = [];
   }
 
   removeTask(task: ToDoTask) {
@@ -102,7 +113,7 @@ export class TaskService {
     this.tasksService.tasks = this.tasksService.tasks.map((taskCategory) => {
       return taskCategory.map((task) => {
         if (task.timestamp === this.editingTask.timestamp) {
-          return { ...newTask, timestamp: task.timestamp };
+          return { ...task, ...newTask, labels: [...this.taskLabelService.labels], timestamp: task.timestamp };
         }
 
         return task;

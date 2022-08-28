@@ -1,44 +1,33 @@
-import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TaskService } from '../task/task.service';
+import { TaskService } from '../../todo-block/task/task.service';
+import { MessageWindowBaseComponent } from '../../../misc/message-window-base/message-window-base.component';
 
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
   styleUrls: ['./add-task.component.scss'],
 })
-export class AddTaskComponent implements OnInit {
+export class AddTaskComponent extends MessageWindowBaseComponent {
   @Input() categoryIndex: number;
-  @Input() onAddTaskWindowOpened: EventEmitter<void>;
-
-  isOpened = false;
-
   form = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.max(64)]),
     content: new FormControl('', [Validators.max(500)]),
     notificationTime: new FormControl(''),
   });
 
-  constructor(private taskService: TaskService) {}
-
-  ngOnInit(): void {
-    this.onAddTaskWindowOpened.subscribe(() => {
-      this.openWindow();
-    });
+  constructor(private taskService: TaskService) {
+    super();
   }
 
   openWindow() {
-    this.isOpened = true;
-  }
-
-  closeWindow() {
-    this.isOpened = false;
+    super.openWindow();
   }
 
   addTask() {
     if (this.form.status === 'VALID') {
       this.taskService.addTask({
-        task: this.form.value,
+        task: { ...this.form.value },
         index: this.categoryIndex,
       });
 
