@@ -113,7 +113,10 @@ export class TaskService {
     this.tasksService.tasks = this.tasksService.tasks.map((taskCategory) => {
       return taskCategory.map((task) => {
         if (task.timestamp === this.editingTask.timestamp) {
-          return { ...task, ...newTask, labels: [...this.taskLabelService.labels], timestamp: task.timestamp };
+          const result = { ...task, ...newTask, labels: [...this.taskLabelService.labels], timestamp: task.timestamp };
+          this.taskLabelService.labels = [];
+
+          return result;
         }
 
         return task;

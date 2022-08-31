@@ -19,7 +19,7 @@ function createWindow(): BrowserWindow {
     height: 600,
     minWidth: 800,
     minHeight: 600,
-    icon: path.join(__dirname, 'rubtidnizer.png'),
+    icon: path.join(__dirname, 'assets/icons/rubtidnizer.png'),
     frame: false,
     webPreferences: {
       nodeIntegration: true,
@@ -109,7 +109,7 @@ ipcMain.on('notification', (event, args) => {
 });
 
 ipcMain.on('auto-launch', (event, args) => {
-  if (serve) {
+  if (!serve) {
     app.setLoginItemSettings({
       openAtLogin: args,
       path: app.getPath('exe'),

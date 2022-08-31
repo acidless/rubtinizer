@@ -63,6 +63,7 @@
   &__day {
     padding: 2em;
     cursor: pointer;
+    user-select: none;
     transition: 0.3s border ease-in-out;
     border: 1px solid var(--main-bg--darker);
 

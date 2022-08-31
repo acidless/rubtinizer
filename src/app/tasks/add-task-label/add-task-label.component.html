@@ -1,5 +1,5 @@
 <app-message-window [isOpened]="isOpened" (onClosed)="closeWindow()">
-  <div class="labels-list add-labels-list flex-container">
+  <div *ngIf="labelService.labels.length" class="labels-list add-labels-list flex-container">
     <app-label
       *ngFor="let label of labelService.labels"
       [showDeleteButton]="false"
@@ -7,4 +7,5 @@
       [onClick]="addLabelClick.bind(this)"
     ></app-label>
   </div>
+  <p #ngElse>Меток пока нет</p>
 </app-message-window>

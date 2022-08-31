@@ -24,6 +24,7 @@
             class="calendar__day"
             [ngClass]="{ active: this.calendarService.isActiveDate(day?.date) }"
             (click)="this.calendarService.setActiveDate(day?.date)"
+            (dblclick)="this.toDateTasks(day?.date)"
           >
             <div *ngIf="day">
               <p>{{ day?.date.getDate() }}</p>
