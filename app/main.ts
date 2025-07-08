@@ -25,7 +25,7 @@ function createWindow(): BrowserWindow {
     minHeight: 600,
     title: 'Rubtinizer',
     frame: false,
-    icon: path.join(__dirname, 'assets/icons/rubtidnizer.png'),
+    icon: path.join(__dirname, 'rubtidnizer.png'),
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,
