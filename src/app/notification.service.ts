@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TasksService } from './tasks/tasks.service';
-import { ElectronService } from 'ngx-electron';
+import { ElectronService } from './core/services';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +12,7 @@ export class NotificationService {
         this.tasksService.tasks[0].forEach((task) => {
           if (task.notificationTime) {
             if (new Date().toLocaleTimeString().substring(0, 5) === task.notificationTime) {
-              this.electronService.ipcRenderer.send('notification', [task]);
+              this.electronService.notify(task.title);
             }
           }
         });

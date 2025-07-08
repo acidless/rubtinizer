@@ -16,7 +16,6 @@ import { AppComponent } from './app.component';
 import { MiscModule } from './misc/misc.module';
 import { TasksModule } from './tasks/tasks.module';
 import { CalendarModule } from './calendar/calendar.module';
-import { NgxElectronModule } from 'ngx-electron';
 import { NotesModule } from './notes/notes.module';
 import { SettingsModule } from './settings/settings.module';
 import { LabelsModule } from './labels/labels.module';
@@ -45,7 +44,6 @@ const httpLoaderFactory = (http: HttpClient): TranslateHttpLoader =>
     TasksModule,
     CalendarModule,
     NotesModule,
-    NgxElectronModule,
     SettingsModule,
     LabelsModule,
   ],

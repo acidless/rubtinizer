@@ -7,5 +7,5 @@
       [onClick]="addLabelClick.bind(this)"
     ></app-label>
   </div>
-  <p #ngElse>Меток пока нет</p>
+  <p *ngIf="!labelService.labels.length">Меток пока нет</p>
 </app-message-window>
