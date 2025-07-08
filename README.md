@@ -25,8 +25,8 @@
 ## 🛠 Установка
 
 ```bash
-git clone https://github.com/acidless/rubtinizer.git
-cd rubtinizer
+git clone https://github.com/acidless/kp11-messenger.git
+cd kp11-messenger
 npm install
 ```
 
