@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Note } from '../../types/note';
-import { ElectronService } from 'ngx-electron';
 import { DatabaseService } from '../database.service';
 
 @Injectable({
@@ -9,7 +8,7 @@ import { DatabaseService } from '../database.service';
 export class NotesService {
   private data: Array<Note> = [];
 
-  constructor(private electronService: ElectronService, private databaseService: DatabaseService) {
+  constructor(private databaseService: DatabaseService) {
     this.databaseService.whenLoaded(async () => {
       this.data = await this.databaseService.getAll('notes');
     });

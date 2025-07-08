@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ElectronService } from 'ngx-electron';
+import { ElectronService } from '../../core/services';
 
 @Injectable({
   providedIn: 'root',
@@ -8,14 +8,14 @@ export class TopbarService {
   constructor(private electronService: ElectronService) {}
 
   windowClose() {
-    this.electronService.ipcRenderer.send('window', ['close']);
+    this.electronService.close();
   }
 
   windowMinimize() {
-    this.electronService.ipcRenderer.send('window', ['minimize']);
+    this.electronService.minimize();
   }
 
   windowMaximize() {
-    this.electronService.ipcRenderer.send('window', ['maximize']);
+    this.electronService.maximize();
   }
 }

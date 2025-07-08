@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ElectronService } from 'ngx-electron';
+import { ElectronService } from '../core/services';
 
 export type Theme = 'dark' | 'light';
 
@@ -21,7 +21,7 @@ export class SettingsService {
 
     if (data.theme) {
       this.settingsData = data;
-      this.electronService.ipcRenderer.send('auto-launch', data.autoLaunch);
+      this.electronService.autoLaunch(data.autoLaunch);
     }
   }
 
@@ -45,7 +45,7 @@ export class SettingsService {
 
   set autoLaunchValue(value) {
     this.settingsData.autoLaunch = value;
-    this.electronService.ipcRenderer.send('auto-launch', value);
+    this.electronService.autoLaunch(value);
 
     localStorage.setItem(
       'settings',
