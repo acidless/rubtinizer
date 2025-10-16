@@ -1,28 +1,28 @@
 # 📝 Rubtinizer Todo Desktop App (Angular + Electron)
 
-Настольное приложение для управления задачами, созданное с использованием Angular и Electron. Поддержка офлайн-режима, локального хранения и минималистичного UI.
+A desktop application for task management, created using Angular and Electron. Supports offline mode, local storage, and a minimalist UI.
 
 ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
 ![Electron](https://img.shields.io/badge/Electron-2C2E3B?style=for-the-badge&logo=electron&logoColor=9FEAF9)
 ![Platform](https://img.shields.io/badge/platform-win-lightgrey?style=for-the-badge)
 
-## 📷 Демонстрация
+## 📷 Demo
 
-![Пример интерфейса](./assets/screenshot.png)
+![UI](./assets/screenshot.png)
 
-> Приложение поддерживает добавление, редактирование, удаление и сортировку задач. Все данные хранятся локально.
+> The app supports adding, editing, deleting, and sorting tasks. All data is stored locally.
 
-## 🚀 Возможности
+## 🚀 Features
 
-- ✅ Добавление/удаление/редактирование задач
-- ⏱️ Уведомления в определенное время для задач
-- 📌 Добавление меток задачам
-- 📅 Наличие календаря и прочих заметок
-- 💾 Локальное хранилище через IndexedDB / LocalStorage
-- 🌓 Поддержка светлой/тёмной темы
-- 🔋 Работает полностью оффлайн
+- ✅ Add/delete/edit tasks
+- ⏱️ Notifications at specific time for tasks
+- 📌 Add tags to tasks
+- 📅 Calendar and other notes
+- 💾 Local storage via IndexedDB / LocalStorage
+- 🌓 Support for light/dark themes
+- 🔋 Works completely offline
 
-## 🛠 Установка
+## 🛠 Install
 
 ```bash
 git clone https://github.com/acidless/kp11-messenger.git
@@ -30,6 +30,6 @@ cd kp11-messenger
 npm install
 ```
 
-## 📝 Лицензия
+## 📝 License
 
-Этот проект распространяется под лицензией MIT.
+This project is distributed under the MIT license
